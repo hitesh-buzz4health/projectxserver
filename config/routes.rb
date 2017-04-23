@@ -18,5 +18,8 @@ namespace :api do
          # end 
  end 
 end 
+
+     post '/register' => 'users#create', :as => :register
+
   # root 'surgeons#index'
 end
