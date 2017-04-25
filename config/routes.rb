@@ -21,5 +21,8 @@ end
 
      post '/register' => 'users#create', :as => :register
 
+     resources :users
+
+
   # root 'surgeons#index'
 end

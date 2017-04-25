@@ -7,7 +7,7 @@ class User
 
   # before_save :ensure_authentication_token
 
-
+  cattr_accessor :current_user
 
   ## Database authenticatable
   field :email,              type: String, default: ""
