@@ -5,10 +5,6 @@ class User
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable 
 
-  # before_save :ensure_authentication_token
-
-  cattr_accessor :current_user
-
   ## Database authenticatable
   field :email,              type: String, default: ""
   field :encrypted_password, type: String, default: ""
@@ -27,21 +23,19 @@ class User
   field :current_sign_in_ip, type: String
   field :last_sign_in_ip,    type: String
 
+ 
+  
+
+
+ 
+ 
+
   field :name,                      :type => String,  :default => ''
   field :registration_code,         :type => String,  :default => ''
   field :specialization,           :type => String, :default =>  ''
   # field :login,                     :type => String, :limit => 40
-  field :authentication_token,       :type => String
+  # field :authentication_token,       :type => String
 
 
-  ## Confirmable
-  # field :confirmation_token,   type: String
-  # field :confirmed_at,         type: Time
-  # field :confirmation_sent_at, type: Time
-  # field :unconfirmed_email,    type: String # Only if using reconfirmable
-
-  ## Lockable
-  # field :failed_attempts, type: Integer, default: 0 # Only if lock strategy is :failed_attempts
-  # field :unlock_token,    type: String # Only if unlock strategy is :email or :both
-  # field :locked_at,       type: Time
+ 
 end

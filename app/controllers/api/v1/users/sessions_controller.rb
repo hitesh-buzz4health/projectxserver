@@ -12,14 +12,12 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
             resource = User.find_for_database_authentication(:email => params[:user][:email]) 
             return invalid_login_attempt unless resource if resource.valid_password?(params[:user][:password])
             sign_in(:user, resource) 
-            set_user resource 
-            
            render :status => 200,
            :json => { :success => true,
                       :info => "Logged in",
                       :data => { 
-                                 :id => User.current_user.id,
-                                 :name => User.current_user.name} }
+                                 :id => current_user.id,
+                                 :name => current_user.name} }
 
   end
 
@@ -37,11 +35,7 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
                       :data => {} }
   end
    
-  #setting current user.
-  def set_user user 
-    User.current_user = user
-  end
-
+  
 
  protected 
 
