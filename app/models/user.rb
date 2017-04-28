@@ -26,13 +26,14 @@ class User
   field :last_sign_in_at,    type: Time
   field :current_sign_in_ip, type: String
   field :last_sign_in_ip,    type: String
-
 #   #authentication token
-  field :authentication_token, type: String, default: ""
-
- 
+  field :authentication_token, type: String
+  field :name,                       type: String
+  field :license_no,                 type: String
+  field :specialization,             type: String
+  
    def assign_authentication_token
-    if authentication_token.blank?
+    if authentication_token.nil?
       self.authentication_token = generate_authentication_token
     end
    end
@@ -58,9 +59,5 @@ class User
  
  
 
-  field :name,                      :type => String,  :default => ''
-  field :registration_code,         :type => String,  :default => ''
-  field :specialization,           :type => String, :default =>  ''
-  
  
 end

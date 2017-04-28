@@ -1,5 +1,5 @@
 class Api::V1::Users::SessionsController < Devise::SessionsController
-  skip_before_action :verify_signed_out_user
+  skip_before_action :verify_signed_out_user, :only => [:destroy]
  skip_before_filter :require_no_authentication, :only => [ :new, :create, :cancel , :destroy]
  skip_before_filter :verify_authenticity_token,
                      :if => Proc.new { |c| c.request.format == 'application/json' }
@@ -27,9 +27,9 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
 
   # DELETE /resource/sign_out
   def destroy 
- 
-    remove_auth_token params[:auth_token]
     super
+    remove_auth_token params[:auth_token]
+    
    
   end
    
@@ -48,7 +48,7 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
      if !token.blank?
        user = User.where(authentication_token: token).first
        if !user.nil?
-         user.authentication_token = ""
+         user.authentication_token = nil 
          user.save!
        end 
      end 

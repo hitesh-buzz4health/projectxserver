@@ -3,22 +3,16 @@ class Preference
 
 
 
-    field :type_of_surgery,           type: String, default: ""
-    field :surgical_approach,         type: String, default: ""
+    field :type_of_surgery,           :type => String
+    field :surgical_approach,         :type => String
     field :computer_nav ,             type: Boolean, :default => false
-    field :tibia_type,                type: String, default: ""
-    field :tibia_bearing ,            type: String, default: ""
-    field :patella_resurfaced ,       type: String, default: ""
-    field :tibia_bearing ,            type: String, default: ""
-    field :tibia_stem,                type: String, default:"" #we need to consider them once more because they values were not confirmed 
-    field :femur_stem,                type: String,  defult: "" #we need to consider them once more because they values were not confirmed 
+    field :tibia_type,                :type => String
+    field :tibia_bearing ,            :type => String
+    field :patella_resurfaced ,       :type => String
+    field :tibia_bearing ,            :type => String
+    field :tibia_stem,                type: Boolean, :default => false
+    field :femur_stem,                type: Boolean,  :default => false
 
-
-
-
-
-
-tibia stem
 
 
 

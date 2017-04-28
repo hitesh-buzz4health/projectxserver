@@ -4,13 +4,13 @@ class Implant
 
 
 
-  field :brand_name,                      :type => String,  :default => ''
-  field :type_of_implant,                  :type => String,  :default => ''
-  field :tibia_type,                        :type => String,  :default => ''
-  field :tibia_bearing ,                  :type => String,  :default => ''
+  field :brand_name,                       :type => String
+  field :type_of_implant,                  :type => String
+  field :tibia_type,                       :type => String
+  field :tibia_bearing ,                   :type => String
   field :patella_resurfaced,               :type => Boolean,  :default => false
   field :tibia_stem,                       :type => Boolean,  :default => false
-  field :femur_stem,                       :type => String,  :default => ''  # the value of this variable is not yet decided.
+  field :femur_stem,                       :type => Boolean,  :default => false  # the value of this variable is not yet decided.
 
 
 

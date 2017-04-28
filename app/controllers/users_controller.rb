@@ -32,13 +32,12 @@ class UsersController < ApplicationController
 			              @user.password              = lookup_hash[0,6]
 			              @user.password_confirmation = lookup_hash[0,6]
 			            end
-			      
-
+			             #we have to  see wether we have to send password through mail or not.
+                          
 			          
                         
 			            #assigning auth_token at the time of registration
 			            @user.assign_authentication_token
-			            # @user.verification_token = UUIDTools::UUID.random_create.hexdigest
 			            success = @user && @user.save
 			            if success && @user.errors.empty?
 			              
@@ -79,7 +78,7 @@ class UsersController < ApplicationController
 				        else
 				          render :status => 412, 
 				                  :json => { :success => false,
-				                              :info => "User Name or password missing",
+				                              :info => "User  details are  missing",
 				                              :data => {} }
 				        end
 			      }
