@@ -1,5 +1,6 @@
 class Api::V1::Users::SessionsController < Devise::SessionsController
- # skip_before_filter :require_no_authentication, :only => [ :new, :create, :cancel ]
+  skip_before_action :verify_signed_out_user
+ skip_before_filter :require_no_authentication, :only => [ :new, :create, :cancel , :destroy]
  skip_before_filter :verify_authenticity_token,
                      :if => Proc.new { |c| c.request.format == 'application/json' }
   before_filter :ensure_params_exist, :except => [:destroy]
@@ -12,18 +13,24 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
             resource = User.find_for_database_authentication(:email => params[:user][:email]) 
             return invalid_login_attempt unless resource if resource.valid_password?(params[:user][:password])
             sign_in(:user, resource) 
-           render :status => 200,
-           :json => { :success => true,
+            resource.assign_authentication_token
+            resource.save!
+            render :status => 200,
+            :json => {
+                       :success => true,
                       :info => "Logged in",
-                      :data => { 
-                                 :id => current_user.id,
-                                 :name => current_user.name} }
+                      :data => { :auth_token => resource.authentication_token,
+                                 :id => resource.id.to_s,
+                                 :name => resource.name} }
 
   end
 
   # DELETE /resource/sign_out
-  def destroy
+  def destroy 
+ 
+    remove_auth_token params[:auth_token]
     super
+   
   end
    
 
@@ -36,6 +43,16 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
   end
    
   
+
+  def remove_auth_token token
+     if !token.blank?
+       user = User.where(authentication_token: token).first
+       if !user.nil?
+         user.authentication_token = ""
+         user.save!
+       end 
+     end 
+  end 
 
  protected 
 
@@ -50,6 +67,9 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
          render :json=> {:message=>"Error with your login or password"}, 
                       :status=>401 
      end
+
+
+
 end
 
 

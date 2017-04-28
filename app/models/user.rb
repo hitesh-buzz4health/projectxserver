@@ -5,6 +5,10 @@ class User
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable 
 
+
+
+
+  
   ## Database authenticatable
   field :email,              type: String, default: ""
   field :encrypted_password, type: String, default: ""
@@ -23,9 +27,33 @@ class User
   field :current_sign_in_ip, type: String
   field :last_sign_in_ip,    type: String
 
- 
-  
+#   #authentication token
+  field :authentication_token, type: String, default: ""
 
+ 
+   def assign_authentication_token
+    if authentication_token.blank?
+      self.authentication_token = generate_authentication_token
+    end
+   end
+
+    
+   
+
+
+  def generate_authentication_token
+    loop do
+      token = Devise.friendly_token
+      break token unless User.where(authentication_token: token).first
+    end
+  end
+
+  def self.find_by_id(id)
+      if !id.nil?
+        user = User.where(_id: BSON::ObjectId(id)).first
+        return user 
+      end 
+  end 
 
  
  
@@ -33,9 +61,6 @@ class User
   field :name,                      :type => String,  :default => ''
   field :registration_code,         :type => String,  :default => ''
   field :specialization,           :type => String, :default =>  ''
-  # field :login,                     :type => String, :limit => 40
-  # field :authentication_token,       :type => String
-
-
+  
  
 end

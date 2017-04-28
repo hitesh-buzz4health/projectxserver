@@ -4,7 +4,6 @@ Rails.application.routes.draw do
 
 
  
-   devise_for :users
    namespace :api do
 
 
@@ -18,6 +17,9 @@ end
      post '/register' => 'users#create', :as => :register
 
      resources :user
+
+     devise_for :users
+
 
 
   # root 'surgeons#index'

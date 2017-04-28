@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
- before_filter :authenticate_user!
  skip_before_filter :verify_authenticity_token,
                  :if => Proc.new { |c| c.request.format == 'application/json' }
 
@@ -37,7 +36,8 @@ class UsersController < ApplicationController
 
 			          
                         
-			           
+			            #assigning auth_token at the time of registration
+			            @user.assign_authentication_token
 			            # @user.verification_token = UUIDTools::UUID.random_create.hexdigest
 			            success = @user && @user.save
 			            if success && @user.errors.empty?
@@ -49,7 +49,7 @@ class UsersController < ApplicationController
 
 			              sign_in(:user, @user)
 
-
+                            
 			              #if @user.country_code == "IN" && @user.user_persona == "doctor"
 			                #show_promo_code = true
 			              #end
@@ -59,8 +59,8 @@ class UsersController < ApplicationController
 			              render :status => :ok,
 			                     :json => { :success => true,
 			                                :info => "Successfully Registered! Please check you email for password",
-			                                :data => { 
-			                                          :id => @user.id
+			                                :data => { :auth_token => @user.authentication_token,
+			                                          :id => @user.id.to_s
 			                                            } }
 
 			            else
