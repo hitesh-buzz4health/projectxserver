@@ -1,7 +1,10 @@
 class Implant 
 
   include Mongoid::Document
+  include Mongoid::Timestamps
 
+    
+  belongs_to :surgical_information
 
 
   field :brand_name,                       :type => String

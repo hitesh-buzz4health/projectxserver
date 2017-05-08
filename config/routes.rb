@@ -16,11 +16,13 @@ end
 
      post '/register' => 'users#create', :as => :register
 
-     resources :user
+     resources :users
 
      devise_for :users
 
-
-
+     resources :preferences
+   
+     resources :patients 
+       
   # root 'surgeons#index'
 end

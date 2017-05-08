@@ -1,30 +1,55 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception
+  
+protect_from_forgery with: :exception
 
- before_filter :set_current_user
- before_filter :authenticate_user_from_token!
+skip_before_filter :verify_authenticity_token,
+                     :if => Proc.new { |c| c.request.format == 'application/json' }
 
 
-  def set_current_user
-  	
-      Thread.current[:current_user] = current_user
 
-  end 
+ before_action :authenticate_user_from_token!
 
+ helper_method :current_user
+
+
+   protected
+       def current_user
+           
+           return @current_user
+       end
+
+ 
 
    private
   
 
   #for authenticating the token 
   def authenticate_user_from_token!
-    user_id = params[:id].presence
+    user_id = params[:user_id].presence
+    puts user_id
     user       = user_id && User.find_by_id(user_id)
-
+    puts user
     if user && Devise.secure_compare(user.authentication_token, params[:auth_token])
       sign_in user, store: false
-    end
+      @current_user = user 
+    else 
+          error_authentication
+    end 
   end
+   
+   def error_authentication
 
+
+         # response when authentication fails 
+             respond_to do |format|
+
+              format.json{
+               render :json =>{
+                              :success => false,
+                              :info => "The auth token and id  does not match.please login ." } }
+              end 
+            
+   end
 
 
 end

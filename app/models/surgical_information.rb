@@ -1,6 +1,14 @@
 class SurgicalInformation
 
   include Mongoid::Document
+   include Mongoid::Timestamps
+
+ 
+   
+# Associations  
+ belongs_to :patient 
+ has_many :implants
+
 
     field :date_of_surgery,                   :type => Date 
     field :patient_name,                      :type => String

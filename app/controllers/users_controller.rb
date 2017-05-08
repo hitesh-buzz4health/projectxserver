@@ -2,6 +2,7 @@ class UsersController < ApplicationController
  skip_before_filter :verify_authenticity_token,
                  :if => Proc.new { |c| c.request.format == 'application/json' }
 
+  skip_before_filter :authenticate_user_from_token!
 
     def index
     
@@ -48,7 +49,7 @@ class UsersController < ApplicationController
 
 			              sign_in(:user, @user)
 
-                            
+ 
 			              #if @user.country_code == "IN" && @user.user_persona == "doctor"
 			                #show_promo_code = true
 			              #end
