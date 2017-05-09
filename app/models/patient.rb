@@ -1,10 +1,10 @@
 class Patient
   include Mongoid::Document
   include Mongoid::Timestamps
-  
+
      #Associations
      has_and_belongs_to_many :users , autosave: true
-     has_many :surgical_informations
+     has_many :surgeries
    
     #do we need surgeon name in this model
     field :surgeon_name,                      :type => String

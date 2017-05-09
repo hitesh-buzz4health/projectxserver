@@ -1,4 +1,4 @@
-class SurgicalInformation
+class Surgery
 
   include Mongoid::Document
    include Mongoid::Timestamps
@@ -8,7 +8,6 @@ class SurgicalInformation
 # Associations  
  belongs_to :patient 
  has_many :implants
-
 
     field :date_of_surgery,                   :type => Date 
     field :patient_name,                      :type => String

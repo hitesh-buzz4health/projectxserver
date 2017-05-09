@@ -23,6 +23,10 @@ end
      resources :preferences
    
      resources :patients 
+
+     resources  :surgeries
+
+     resources  :implants
        
   # root 'surgeons#index'
 end

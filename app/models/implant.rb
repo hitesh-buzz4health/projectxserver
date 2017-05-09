@@ -4,7 +4,7 @@ class Implant
   include Mongoid::Timestamps
 
     
-  belongs_to :surgical_information
+  belongs_to :surgery
 
 
   field :brand_name,                       :type => String
