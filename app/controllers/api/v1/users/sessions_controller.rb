@@ -4,6 +4,8 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
  skip_before_filter :verify_authenticity_token,
                      :if => Proc.new { |c| c.request.format == 'application/json' }
   before_filter :ensure_params_exist, :except => [:destroy]
+  skip_before_filter :authenticate_user_from_token!
+
 
   respond_to :json
 

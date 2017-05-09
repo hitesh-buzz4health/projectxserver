@@ -12,7 +12,7 @@ class Preference
     field :computer_nav ,             type: Boolean, :default => false
     field :tibia_type,                :type => String
     field :tibia_bearing ,            :type => String
-    field :patella_resurfaced ,       :type => String
+    field :patella_resurfaced ,       :type => Boolean,  :default => false
     field :tibia_stem,                type: Boolean, :default => false
     field :femur_stem,                type: Boolean,  :default => false
 
