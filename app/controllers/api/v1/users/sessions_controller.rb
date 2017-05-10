@@ -1,10 +1,10 @@
 class Api::V1::Users::SessionsController < Devise::SessionsController
   skip_before_action :verify_signed_out_user, :only => [:destroy]
- skip_before_filter :require_no_authentication, :only => [ :new, :create, :cancel , :destroy]
- skip_before_filter :verify_authenticity_token,
+ skip_before_action :require_no_authentication, :only => [ :new, :create, :cancel , :destroy]
+ skip_before_action :verify_authenticity_token,
                      :if => Proc.new { |c| c.request.format == 'application/json' }
-  before_filter :ensure_params_exist, :except => [:destroy]
-  skip_before_filter :authenticate_user_from_token!
+  before_action :ensure_params_exist, :except => [:destroy]
+  skip_before_action :authenticate_user_from_token!
 
 
   respond_to :json
