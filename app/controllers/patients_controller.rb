@@ -3,50 +3,27 @@ class PatientsController < ApplicationController
 
 
 	def create 
-	    if !params[:patient_name].nil? && !params[:unique_id].nil?
-
-	     @patient = Patient.new 
-         @patient.name = params[:patient_name]
-         @patient.unique_id = params[:unique_id]
-
-            if !params[:date_of_birth].nil?
-
-          	@patient.date_of_birth = params[:date_of_birth]
-
+	    if !params[:patient][:patient_name].nil? && !params[:patient][:unique_id].nil?
+	       @patient = Patient.new 
+         @patient.name = params[:patient][:patient_name]
+         @patient.unique_id = params[:patient][:unique_id]
+            if !params[:patient][:date_of_birth].nil?
+          	@patient.date_of_birth = params[:patient][:date_of_birth]
+            end     
+            if !params[:patient][:age].nil?
+          	@patient.age = params[:patient][:age]
             end
-          
-            if !params[:age].nil?
-
-          	@patient.age = params[:age]
-
+            if !params[:patient][:sex].nil?
+          	@patient.sex = params[:patient][:sex]
             end
-
-            if !params[:sex].nil?
-
-          	@patient.sex = params[:sex]
-
+            if !params[:patient][:height].nil?
+          	@patient.height = params[:patient][:height]
             end
-
-            if !params[:height].nil?
-
-          	@patient.height = params[:height]
-
+            if !params[:patient][:weight].nil?
+          	@patient.weight = params[:patient][:weight] 
             end
-          
-
-            if !params[:weight].nil?
-
-          	@patient.weight = params[:weight]
-
-           end
-
-
-
-
-            if !params[:score].nil?
-
-          	 @patient.height = params[:score]
-
+            if !params[:patient][:score].nil?
+          	 @patient.height = params[:patient][:score]
             end
             @patient.users << current_user
             @patient.save!
@@ -55,6 +32,7 @@ class PatientsController < ApplicationController
 
             @current_user.patients << @patient
             @current_user.save!
+
                respond_to do |format|
 
 		            format.json{
@@ -69,7 +47,7 @@ class PatientsController < ApplicationController
 
 	    	      #responding in case of patient name is not provided 
 
-                   respond_to do |format|
+              respond_to do |format|
 
 		            format.json{
 		               render :json =>{ :success => false ,
@@ -87,79 +65,55 @@ class PatientsController < ApplicationController
            
        @patient = Patient.find(params[:id])
        if !@patient.nil?
-
-       	   if !params[:patient_name].nil?
-              
-               @patient.name = params[:patient_name]
-
+       	   if !params[:patient][:patient_name].nil?
+               @patient.name = params[:patient][:patient_name]
        	   end 
-           
-
-           if !params[:date_of_birth].nil?
-
-          	@patient.date_of_birth = params[:date_of_birth]
-
-            end
-          
-            if !params[:age].nil?
-
-          	@patient.age = params[:age]
-
-            end
-
-            if !params[:sex].nil?
-
-          	@patient.sex = params[:sex]
-
-            end
-
-            if !params[:height].nil?
-
-          	@patient.height = params[:height]
-
-            end
-          
-
-            if !params[:weight].nil?
-
-          	@patient.weight = params[:weight]
-
-            end
-
-
-            if !params[:score].nil?
-
-          	 @patient.height = params[:score]
-
-            end
+           if !params[:patient][:date_of_birth].nil?
+          	@patient.date_of_birth = params[:patient][:date_of_birth]
+           end
+           if !params[:patient][:age].nil?
+          	@patient.age = params[:patient][:age]
+           end
+           if !params[:patient][:sex].nil?
+          	@patient.sex = params[:patient][:sex]
+           end
+           if !params[:patient][:height].nil?
+          	@patient.height = params[:patient][:height]
+           end
+           if !params[:patient][:weight].nil?
+          	@patient.weight = params[:patient][:weight]
+           end
+           if !params[:patient][:score].nil?
+          	 @patient.height = params[:patient][:score]
+          end
 
             @patient.save!
 
 
-            #sending response in case of update successfull
-            respond_to do |format|
+                #sending response in case of update successfull
+                respond_to do |format|
 
-               format.json{
-               	  render :json =>{ :success => true ,
-			                      :info => "the patient details has been updated ",
-			                       :data => { :patient => @patient   }}}
+                   format.json{
+                   	  render :json =>{ :success => true ,
+    			                      :info => "the patient details has been updated ",
+    			                       :data => { :patient => @patient   }}}
 
-            end
+                end
 
 
 
        else 
-           # in case there is no patient with the given id 
-                   respond_to do |format|
+             # in case there is no patient with the given id 
+                  respond_to do |format|
 
-			            format.json{
-			               render :json =>{ :success => false ,
-			                      :info => "the patient details is not available."
-			                         } }
-		           end 
+  			            format.json{
+  			               render :json =>{ :success => false ,
+  			                      :info => "the patient details is not available."
+  			                         } }
+  		           end 
 
 
-       end 
+      end 
 
     end 
 

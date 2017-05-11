@@ -4,79 +4,39 @@ class SurgeriesController < ApplicationController
 
  def create 
 
- 	if !params[:patient_id].nil?
-           
-            patient = Patient.find(params[:patient_id])
-            @surgery = Surgery.new
 
-            @surgery.patient_name = params[:patient_name]
+       patient = Patient.find(params[:patient_id])
 
-
-            if !params[:date_of_surgery].nil?
-
-                @surgery.date_of_surgery = params[:date_of_surgery]
-
-            end 
-
-            
-             if !params[:surgery_for].nil?
-
-                @surgery.surgery_for = params[:surgery_for]
-
-            end 
-
-             if !params[:nature_of_surgery].nil?
-
-                @surgery.nature_of_surgery = params[:nature_of_surgery]
-
-            end 
-
-             if !params[:surgical_approach].nil?
-
-                @surgery.surgical_approach = params[:surgical_approach]
-
-            end 
-
-
-             if !params[:computer_nav].nil?
-
-                @surgery.computer_nav = params[:computer_nav]
-
-            end 
-
-
-             @surgery.patient = patient
-             @surgery.save!
-
-             patient.surgeries << @surgery
-             patient.save!
-
-
+   	if  !patient.nil?
+          if !params[:surgery].nil? && !params[:implant].nil?             
+              creating_surgery params[:surgery]  , patient
+               params[:implant].each do |implant|
+                 attaching_impalnt_to_surgery implant
+               end 
+                    
+               respond_to do |format|
+                  format.json{
+                     render :json =>{ :success => true ,
+                            :info => "new surgery  created",
+                            :data => { :surgery => @surgery } } }
+               end 
+          else 
+              #rendering message in case of nil surgery
               respond_to do |format|
-
-		            format.json{
-		               render :json =>{ :success => true ,
-		                      :info => "new surgery  created",
-		                      :data => { 
-		                                    :surgery => @surgery } } }
-		         end 
-
-
-           
- 
-   
-
+                      format.json{
+                         render :json =>{
+                                        :success => false,
+                                        :info => " not enough info  related to this surgery" } }
+              end 
+          end    
     else 
-
-        # when patient id is nil 
-
-        respond_to do |format|
-
-                    format.json{
-                       render :json =>{
-                                      :success => false,
-                                      :info => "please provide  the patient related to this surgery" } }
-        end 
+          # when patient id is nil 
+          respond_to do |format|
+                      format.json{
+                         render :json =>{
+                                        :success => false,
+                                        :info => "please provide  the patient related to this surgery" } }
+          end 
 
 
 
@@ -98,13 +58,10 @@ class SurgeriesController < ApplicationController
    surgery = Surgery.find(params[:id])
 
     respond_to do |format|
-
 		            format.json{
 		               render :json =>{ :success => true ,
 		                      :data => {  :surgery => surgery } } }
 	  end 
-
-
  end 
 
 
@@ -123,85 +80,147 @@ class SurgeriesController < ApplicationController
  def update 
 
 
-  @surgery = Surgery.find(params[:id])
+    @surgery = Surgery.find(params[:id])
+    if !@surgery.nil? && !params.nil?
+              @surgery.patient_name = params[:patient_name]
+              if !params[:date_of_surgery].nil?
+                  @surgery.date_of_surgery = params[:date_of_surgery]
+              end 
+              if !params[:surgery_for].nil?
+                  @surgery.surgery_for = params[:surgery_for]
+              end 
+              if !params[:nature_of_surgery].nil?
+                  @surgery.nature_of_surgery = params[:nature_of_surgery]
+              end 
+              if !params[:surgical_approach].nil?
+                 @surgery.surgical_approach = params[:surgical_approach]
+              end 
+              if !params[:computer_nav].nil?
+                  @surgery.computer_nav = params[:computer_nav]
+              end 
 
-  if !params.nil?
-           
+             #saving the updated surgery info
 
-            @surgery.patient_name = params[:patient_name]
-
-
-            if !params[:date_of_surgery].nil?
-
-                @surgery.date_of_surgery = params[:date_of_surgery]
-
+            if !params[:implant].nil?
+                 params[:implant].each do |item|
+                   implant  = KneeImplant.find(item[:implant_id])
+                   #deleting the existing implant 
+                    if !implant.nil?
+                     @surgery.knee_implants.delete(implant)  
+                     attaching_impalnt_to_surgery item
+                    end 
+                end 
             end 
+ 
+              @surgery.save!
+            # responding updated surgery
+             respond_to do |format|
 
-            
-             if !params[:surgery_for].nil?
+                      format.json{
+                         render :json =>{ :success => true ,
+                                :info => "Surgery info has been updated.",
+                                :data => { 
+                                              :surgery => @surgery } } }
+                   end
+      else 
+             # when patient id is nil 
+             respond_to do |format|
 
-                @surgery.surgery_for = params[:surgery_for]
+                      format.json{
+                         render :json =>{
+                                        :success => false,
+                                        :info => "please provide  the patient related to this surgery" } }
+              end 
 
-            end 
-
-             if !params[:nature_of_surgery].nil?
-
-                @surgery.nature_of_surgery = params[:nature_of_surgery]
-
-            end 
-
-             if !params[:surgical_approach].nil?
-
-                @surgery.surgical_approach = params[:surgical_approach]
-
-            end 
-
-
-             if !params[:computer_nav].nil?
-
-                @surgery.computer_nav = params[:computer_nav]
-
-            end 
-
-            #saving the updated surgery info 
-
-            @surgery.save!
-             
-
-          # responding updated surgery
-
-
-           respond_to do |format|
-
-                    format.json{
-                       render :json =>{ :success => true ,
-                              :info => "Surgery info has been updated.",
-                              :data => { 
-                                            :surgery => @surgery } } }
-                 end 
-
-
-
-
-
-    else 
-           # when patient id is nil 
-           
-           respond_to do |format|
-
-                    format.json{
-                       render :json =>{
-                                      :success => false,
-                                      :info => "please provide  the patient related to this surgery" } }
-            end 
-
-
-
-    end  
+      end  
 
 
 
  end 
+
+
+
+
+ def creating_surgery params , patient
+
+            @surgery = Surgery.new
+
+             if !params[:date_of_surgery].nil?
+              @surgery.patient_name = params[:patient_name]
+             end 
+             if !params[:date_of_surgery].nil?
+                @surgery.date_of_surgery = params[:date_of_surgery]
+             end 
+             if !params[:surgery_for].nil?
+                @surgery.surgery_for = params[:surgery_for]
+             end 
+             if !params[:nature_of_surgery].nil?
+                @surgery.nature_of_surgery = params[:nature_of_surgery]
+             end 
+             if !params[:surgical_approach].nil?
+                @surgery.surgical_approach = params[:surgical_approach]
+             end 
+             if !params[:computer_nav].nil?
+                @surgery.computer_nav = params[:computer_nav]
+             end 
+
+             @surgery.patient = patient
+             @surgery.save!
+            
+             patient.surgeries << @surgery
+             patient.save!
+
+            
+
+ end 
+
+
+
+ def attaching_impalnt_to_surgery params
+       
+
+   @implant = KneeImplant.where(:brand_name => params[:brand_name] , 
+        :type_of_implant => params[:type_of_implant]  , 
+        :tibia_type => params[:tibia_type] , 
+        :tibia_bearing => params[:tibia_bearing] , 
+        :patella_resurfaced => params[:patella_resurfaced] ,
+        :tibia_stem =>params[:tibia_stem]  ,
+        :femur_stem => params[:femur_stem] ).first
+
+   if @implant.nil?      
+      @implant = KneeImplant.new 
+      if !params[:brand_name].nil?
+          @implant.brand_name = params[:brand_name]
+      end 
+      if !params[:type_of_implant].nil? 
+           @implant.type_of_implant = params[:type_of_implant]
+      end  
+      if !params[:tibia_type].nil?
+          @implant.tibia_type = params[:tibia_type]
+      end 
+      if !params[:tibia_bearing].nil?
+          @implant.tibia_bearing = params[:tibia_bearing]
+      end 
+      if !params[:patella_resurfaced].nil?
+          @implant.patella_resurfaced = params[:patella_resurfaced]
+      end 
+      if !params[:tibia_stem].nil?
+          @implant.tibia_stem = params[:tibia_stem]
+      end 
+      if !params[:femur_stem].nil?
+          @implant.femur_stem = params[:femur_stem]
+      end 
+
+   end     
+      
+          @implant.surgeries << @surgery 
+          @implant.save!
+
+          # @surgery.knee_implants << @knee_implants
+          # @surgery.save!
+
+ end 
+
 
 
 
