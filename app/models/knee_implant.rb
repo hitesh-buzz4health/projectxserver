@@ -4,7 +4,7 @@ class KneeImplant
   include Mongoid::Timestamps
 
     
-  has_and_belongs_to_many :surgeries , autosave: true ,, uniq: false 
+  has_and_belongs_to_many :surgeries , autosave: true 
 
 
   field :brand_name,                       :type => String
