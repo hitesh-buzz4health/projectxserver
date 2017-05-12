@@ -1,6 +1,34 @@
 class PreferencesController < ApplicationController
 
+   
 
+
+   def index
+
+   	  if params[:type_of_surgery].eql?"Knee"
+   	  	@surgical_approach = SurgicalApproach.where(:type_of_surgery => params[:type_of_surgery])
+   	  	@implants          = KneeImplant.all
+
+        respond_to do |format|
+
+		            format.json{
+		               render :json =>{ :success => true ,
+		                      :info => "returning list of surgical Approach",
+		                      :data => { :surgical_approach => @surgical_approach.as_json,
+		                                 :implants  => @implants.as_json 
+		                                 } } }
+		 end    
+
+
+
+
+
+   	  end 
+
+   	
+
+
+   end 
 
 	def create
 		if current_user.preference.nil?

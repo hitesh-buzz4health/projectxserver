@@ -25,12 +25,12 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
                        :success => true,
                       :info => "Logged in",
                       :data => { :auth_token => resource.authentication_token,
-                                 :id => resource.id.to_s,
-                                 :name => resource.name} }
+                                 :id => resource.id.to_s
+                                   } }
 
             else 
 
-                 invalid_login_attempt
+                 failure
 
             end 
 

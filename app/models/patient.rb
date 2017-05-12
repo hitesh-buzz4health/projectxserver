@@ -8,7 +8,7 @@ class Patient
    
     #do we need surgeon name in this model
     field :surgeon_name,                      :type => String
-    field :name,                      :type => String
+    field :name,                              :type => String
     field :date_of_birth,                     :type  => Date
     field :age ,                              :type => Integer,  :default => 0
     field :sex ,                              :type => String
@@ -17,7 +17,7 @@ class Patient
 
     field :unique_id,                         :type => String
 
-    field :score ,                       :type => Integer,  :default => 0
+    field :score ,                            :type => Integer,  :default => 0
 
 
 

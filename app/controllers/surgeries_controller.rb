@@ -6,10 +6,11 @@ class SurgeriesController < ApplicationController
 
 
        patient = Patient.find(params[:patient_id])
+       surgical_approach  =  SurgicalApproach.find(params[:surgical_apprpach_id])
 
-   	if  !patient.nil?
+   	if  !patient.nil? && !surgical_approach.nil?
           if !params[:surgery].nil? && !params[:implant].nil?             
-              creating_surgery params[:surgery]  , patient
+              creating_surgery params[:surgery]  , patient  , surgical_approach
                params[:implant].each do |implant|
                  attaching_impalnt_to_surgery implant
                end 
@@ -35,7 +36,7 @@ class SurgeriesController < ApplicationController
                       format.json{
                          render :json =>{
                                         :success => false,
-                                        :info => "please provide  the patient related to this surgery" } }
+                                        :info => "Either patient or Surgical Approach is missing." } }
           end 
 
 
@@ -81,6 +82,8 @@ class SurgeriesController < ApplicationController
 
 
     @surgery = Surgery.find(params[:id])
+    surgical_approach  =  SurgicalApproach.find(params[:surgical_approach_id])
+
     if !@surgery.nil? && !params.nil?
               @surgery.patient_name = params[:patient_name]
               if !params[:date_of_surgery].nil?
@@ -99,6 +102,12 @@ class SurgeriesController < ApplicationController
                   @surgery.computer_nav = params[:computer_nav]
               end 
 
+              if !surgical_approach.nil? 
+                  @surgery.surgical_approach = surgical_approach
+                  
+                   
+              end 
+ 
              #saving the updated surgery info
 
             if !params[:implant].nil?
@@ -141,7 +150,7 @@ class SurgeriesController < ApplicationController
 
 
 
- def creating_surgery params , patient
+ def creating_surgery params , patient , surgical_approach
 
             @surgery = Surgery.new
 
@@ -165,6 +174,7 @@ class SurgeriesController < ApplicationController
              end 
 
              @surgery.patient = patient
+             @surgery.surgical_approach = surgical_approach
              @surgery.save!
             
              patient.surgeries << @surgery
