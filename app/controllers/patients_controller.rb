@@ -161,6 +161,7 @@ class PatientsController < ApplicationController
       secure_score  = SecureScore.new 
       secure_score.patient_score = params[:secure_score][:patient_score]
       secure_score.score_date = params[:secure_score][:score_date]
+      saving_answers_for_score params[:secure_score][:answers] , secure_score
       secure_score.patient = patient
       secure_score.score = score 
       secure_score.save!
@@ -228,6 +229,29 @@ def  list_of_secure_scores
 
 end 
 
+
+
+
+
+def saving_answers_for_score  answers , secure_score
+
+   answers.each do | answer_options |
+     answer = Answer.new 
+     question = Question.find(answer_options[:question_id])
+     option = Option.find(answer_options[:option_id])
+     if !question.nil? && !option.nil?
+          
+          answer.question = question
+          answer.option = option
+          answer.secure_score = secure_score
+          answer.save!
+
+     end 
+
+   end 
+
+
+end  
 
 end 
 

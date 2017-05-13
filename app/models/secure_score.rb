@@ -5,6 +5,7 @@ class SecureScore
 
   belongs_to :patient , autosave: true
   belongs_to :score ,  autosave: true 
+  has_many :answers , autosave: true
 
   field :patient_score ,            :type => Integer ,  :default => 0  
   field :score_date ,       :type => Date 

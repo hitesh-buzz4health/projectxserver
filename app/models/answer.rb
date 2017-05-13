@@ -6,7 +6,7 @@ class Answer
 
   belongs_to :secure_score , autosave: true
   belongs_to :question     , autosave: true 
-  belongs_to :option       , autosave: true 
+  belongs_to :option      
   
 
 
