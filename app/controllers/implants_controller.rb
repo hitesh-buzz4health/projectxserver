@@ -2,6 +2,19 @@ class ImplantsController < ApplicationController
 
 
 
+
+
+
+
+  def index
+       
+ 
+
+
+   end 
+
+
+
   def create 
 
 

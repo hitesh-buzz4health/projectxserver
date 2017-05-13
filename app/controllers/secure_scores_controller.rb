@@ -1,0 +1,8 @@
+class SecureScoresController < ApplicationController
+
+
+
+
+
+
+end 

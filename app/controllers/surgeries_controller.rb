@@ -101,11 +101,8 @@ class SurgeriesController < ApplicationController
               if !params[:computer_nav].nil?
                   @surgery.computer_nav = params[:computer_nav]
               end 
-
               if !surgical_approach.nil? 
-                  @surgery.surgical_approach = surgical_approach
-                  
-                   
+                  @surgery.surgical_approach = surgical_approach 
               end 
  
              #saving the updated surgery info

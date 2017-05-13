@@ -4,8 +4,11 @@ class Patient
 
      #Associations
      has_and_belongs_to_many :users , autosave: true
-     has_many :surgeries
-   
+     has_many :surgeries , autosave: true
+
+     #different types of scores 
+     has_many :secure_scores  , autosave: true
+
     #do we need surgeon name in this model
     field :surgeon_name,                      :type => String
     field :name,                              :type => String
@@ -17,7 +20,6 @@ class Patient
 
     field :unique_id,                         :type => String
 
-    field :score ,                            :type => Integer,  :default => 0
 
 
 

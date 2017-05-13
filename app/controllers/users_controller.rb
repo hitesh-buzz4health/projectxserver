@@ -17,7 +17,7 @@ class UsersController < ApplicationController
 			          @user = User.where(:email => params[:user][:email].downcase).first unless User.where(:email => params[:user][:email].downcase).count == 0 
 			          if @user.nil?
 			            @user = User.new
-			            lookup_hash                 = UUIDTools::UUID.random_create.hexdigest  
+			            lookup_hash   = UUIDTools::UUID.random_create.hexdigest  
 			            # @user.phone_number          = params[:user][:phone_number]
 			            # @user.safe_update(%w[name email ], params[:user])
                          @user.name = params[:user][:name]

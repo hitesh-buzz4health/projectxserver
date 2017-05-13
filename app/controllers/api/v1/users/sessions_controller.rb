@@ -14,9 +14,9 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
 
             resource = User.find_for_database_authentication(:email => params[:user][:email]) 
             
-            if !resource.nil?
+            if !resource.nil? && resource.valid_password?(params[:user][:password])
 
-            resource.valid_password?(params[:user][:password])
+
             sign_in(:user, resource) 
             resource.assign_authentication_token
             resource.save!
@@ -50,8 +50,8 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
   def failure
     render :status => :unauthorized,
            :json => { :success => false,
-                      :info => "Login Failed",
-                      :data => {} }
+                      :info => "Login Failed"
+                     }
   end
    
   
