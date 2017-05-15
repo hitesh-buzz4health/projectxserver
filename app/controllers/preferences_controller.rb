@@ -5,8 +5,8 @@ class PreferencesController < ApplicationController
 
    def index
 
-   	  if params[:type_of_surgery].eql?"Knee"
-   	  	@surgical_approach = SurgicalApproach.where(:type_of_surgery => params[:type_of_surgery])
+   	  if params[:surgery_type].eql?"Knee"
+   	  	@surgical_approach = SurgicalApproach.where(:surgery_type => params[:surgery_type])
    	  	@implants          = KneeImplant.all
 
         respond_to do |format|
@@ -32,9 +32,11 @@ class PreferencesController < ApplicationController
 
 	def create
 		if current_user.preference.nil?
-		    if !params[:user].nil? && !params[:user][:type_of_surgery].nil?
+		    if !params[:user].nil? && !params[:user][:surgery_type].nil?
 			  @preference = Preference.new 
-			  @preference.type_of_surgery = params[:user][:type_of_surgery]  # we have to check wether we have to insert conditions for each parameter separtely
+			  @preference.surgery_type = params[:user][:surgery_type]  # we have to check wether we have to insert conditions for each parameter separtel
+			  @preference.brand_name = params[:user][:brand_name]
+			  @preference.type_of_implant = params[:user][:type_of_implant]
 			  @preference.surgical_approach = params[:user][:surgical_approach]
 			  @preference.computer_nav = params[:user][:computer_nav]
 			  @preference.tibia_type = params[:user][:tibia_type]
@@ -96,8 +98,8 @@ class PreferencesController < ApplicationController
 
 	  @user_preference = Preference.find(params[:id])
 
-	  if !params[:user][:type_of_surgery].nil?
-	  	@user_preference.type_of_surgery = params[:user][:type_of_surgery] 
+	  if !params[:user][:surgery_type].nil?
+	  	@user_preference.surgery_type = params[:user][:surgery_type] 
       end 
 
 	  if !params[:user][:surgical_approach].nil?
@@ -115,9 +117,12 @@ class PreferencesController < ApplicationController
 
       end
 
-	  if !params[:user][:tibia_bearing].nil?
-	  @user_preference.tibia_bearing = params[:user][:tibia_bearing]
+	  if !params[:user][:brand_name].nil?
+	  @user_preference.brand_name = params[:user][:brand_name]
+      end
 
+      if !params[:user][:type_of_implant].nil?
+	  @user_preference.type_of_implant = params[:user][:type_of_implant]
       end
 
 	  if !params[:user][:patella_resurfaced].nil?

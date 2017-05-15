@@ -1,4 +1,4 @@
-class Preference
+class Preference 
   include Mongoid::Document
   include Mongoid::Timestamps
 
@@ -6,8 +6,9 @@ class Preference
     #Associations
     belongs_to :user 
     
-
-    field :type_of_surgery,           :type => String
+    field :brand_name,                       :type => String
+    field :type_of_implant,                  :type => String
+    field :surgery_type,                :type => String
     field :surgical_approach,         :type => String
     field :computer_nav ,             type: Boolean, :default => false
     field :tibia_type,                :type => String
