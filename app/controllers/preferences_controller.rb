@@ -174,15 +174,36 @@ class PreferencesController < ApplicationController
 		            format.json{
 		               render :json =>{ :success => true ,
 		                      :info => "preference for the current user",
-		                      :data => { :auth_token => current_user.authentication_token,
-		                                 :id => current_user.id.to_s,
-		                                 :name => current_user.name ,
-		                                 :user_preference => current_user.preference } } }
+		                      :data => { 
+		                                 :preference =>  @preference} } }
 	 end 
 
 
 
 	end 
+
+
+
+
+   def get_current_user_preference
+
+       @preference = current_user.preference
+
+      respond_to do |format|
+
+		            format.json{
+		               render :json =>{ :success => true ,
+		                      :info => "preference for the current user",
+		                      :data => { 
+		                                 :user_preference => @preference } } }
+	 end 
+
+
+
+
+
+
+   end 
 
 
 
