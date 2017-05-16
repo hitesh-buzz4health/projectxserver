@@ -5,7 +5,7 @@ class Patient
      #Associations
      has_and_belongs_to_many :users , autosave: true
      has_many :surgeries , autosave: true
-
+     has_many :diagnoses  , autosave: true
      #different types of scores 
      has_many :secure_scores  , autosave: true
 
