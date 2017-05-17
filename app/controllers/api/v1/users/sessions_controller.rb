@@ -25,8 +25,8 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
                        :success => true,
                       :info => "Logged in",
                       :data => { :auth_token => resource.authentication_token,
-                                 :id => resource.id.to_s
-                                   } }
+                                 :id => resource.id.to_s,
+                                 :pref_id => resource.preference.id.to_s   } }
 
             else 
 
