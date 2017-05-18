@@ -33,6 +33,8 @@ end
      resources  :secure_scores
      
      resources  :diagnoses
+
+     resources  :static_data
     #defining routes for getting scores with 
      get '/get_score_with_type' => 'scores#with_type_of_score'
      post '/creating_patient_secure_score' => 'patients#creating_patient_secure_score'
