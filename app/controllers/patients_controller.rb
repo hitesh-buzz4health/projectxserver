@@ -54,7 +54,7 @@ class PatientsController < ApplicationController
 		               render :json =>{ :success => true ,
 		                      :info => "new patient created",
 		                      :data => { 
-		                                    :patient => @patient } } }
+		                                    :patient => @patient.as_json } } }
 		         end 
 
 	    
@@ -111,7 +111,7 @@ class PatientsController < ApplicationController
                    format.json{
                    	  render :json =>{ :success => true ,
     			                      :info => "the patient details has been updated ",
-    			                       :data => { :patient => @patient   }}}
+    			                       :data => { :patient => @patient.as_json   }}}
 
                 end
 
@@ -143,7 +143,7 @@ class PatientsController < ApplicationController
                format.json{
                	  render :json =>{ :success => true ,
 			                       :info => "the patient details for particular patient",
-			                       :data => { :patient => @patient   }}}
+			                       :data => { :patient => @patient.as_json   }}}
 
       end 
 

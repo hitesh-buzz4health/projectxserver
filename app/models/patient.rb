@@ -21,6 +21,22 @@ class Patient
     field :unique_id,                         :type => String
 
 
+    def as_json(options={})
+    {   
+        :_id => id.to_s,
+        :surgeon_name => surgeon_name,
+        :name => name,
+        :date_of_birth => date_of_birth,
+        :age => age,
+        :sex => sex,
+        :height => height,
+        :weight => weight,
+        :unique_id => unique_id
+       
+    }
+    end  
+
+
 
 
 

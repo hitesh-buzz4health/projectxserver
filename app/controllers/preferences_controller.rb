@@ -56,10 +56,7 @@ class PreferencesController < ApplicationController
 		            format.json{
 		               render :json =>{ :success => true ,
 		                      :info => "preference for the user is created",
-		                      :data => { :auth_token => current_user.authentication_token,
-		                                 :id => current_user.id.to_s,
-		                                 :name => current_user.name ,
-		                                 :user_preference => current_user.preference } } }
+		                      :data => { :user_preference =>  @preference } } }
 		         end 
 
 
@@ -82,11 +79,8 @@ class PreferencesController < ApplicationController
 
 		            format.json{
 		            	  render :json =>{:success => false,
-		                                  :info => "preference already created for this user ",
-					              :data => { :auth_token => current_user.authentication_token,
-					                         :id => current_user.id.to_s,
-					                         :name => current_user.name ,
-					                         :user_preference => current_user.preference} } }
+		                                  :info => "preference already created for this user, if you wish to make changes use the update method",
+					              :data => { :user_preference => current_user.preference.as_json} } }
 		            end 
 
 	     end 
@@ -153,10 +147,7 @@ class PreferencesController < ApplicationController
 		            format.json{
 		               render :json =>{ :success => true ,
 		                      :info => "preference for the user is updated",
-		                      :data => { :auth_token => current_user.authentication_token,
-		                                 :id => current_user.id.to_s,
-		                                 :name => current_user.name ,
-		                                 :user_preference => current_user.preference } } }
+		                      :data => {  :user_preference => current_user.preference.as_json } } }
 	  end 
 
 	end 
@@ -175,7 +166,7 @@ class PreferencesController < ApplicationController
 		               render :json =>{ :success => true ,
 		                      :info => "preference for the current user",
 		                      :data => { 
-		                                 :preference =>  @preference} } }
+		                                 :preference =>  @preference.as_json} } }
 	 end 
 
 
@@ -195,7 +186,7 @@ class PreferencesController < ApplicationController
 		               render :json =>{ :success => true ,
 		                      :info => "preference for the current user",
 		                      :data => { 
-		                                 :user_preference => @preference } } }
+		                                 :user_preference => @preference.as_json } } }
 	 end 
 
 
