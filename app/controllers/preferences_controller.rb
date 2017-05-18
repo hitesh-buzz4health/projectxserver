@@ -39,6 +39,7 @@ class PreferencesController < ApplicationController
 			  @preference.type_of_implant = params[:user][:type_of_implant]
 			  @preference.surgical_approach = params[:user][:surgical_approach]
 			  @preference.computer_nav = params[:user][:computer_nav]
+			  @preference.weight_unit = params[:user][:weight_unit]
 			  @preference.tibia_type = params[:user][:tibia_type]
 			  @preference.tibia_bearing = params[:user][:tibia_bearing]
 			  @preference.patella_resurfaced = params[:user][:patella_resurfaced]
@@ -115,6 +116,10 @@ class PreferencesController < ApplicationController
 	  @user_preference.brand_name = params[:user][:brand_name]
       end
 
+      if !params[:user][:weight_unit].nil?
+      @user_preference.weight_unit = params[:user][:weight_unit]
+      end
+       
       if !params[:user][:type_of_implant].nil?
 	  @user_preference.type_of_implant = params[:user][:type_of_implant]
       end
@@ -147,7 +152,7 @@ class PreferencesController < ApplicationController
 		            format.json{
 		               render :json =>{ :success => true ,
 		                      :info => "preference for the user is updated",
-		                      :data => {  :user_preference => current_user.preference.as_json } } }
+		                      :data => {  :user_preference =>  @user_preference.as_json } } }
 	  end 
 
 	end 
