@@ -41,6 +41,12 @@ class PatientsController < ApplicationController
             if !params[:patient][:score].nil?
           	 @patient.height = params[:patient][:score]
             end
+            if !params[:patient][:email_id].nil?
+             @patient.email_id = params[:patient][:email_id]
+            end
+            if !params[:patient][:phone_no].nil?
+               @patient.phone_no = params[:patient][:phone_no]
+            end 
             @patient.users << current_user
             @patient.save!
 
@@ -108,6 +114,12 @@ class PatientsController < ApplicationController
            if !params[:patient][:score].nil?
           	 @patient.height = params[:patient][:score]
           end
+          if !params[:patient][:email_id].nil?
+             @patient.email_id = params[:patient][:email_id]
+          end
+          if !params[:patient][:phone_no].nil?
+               @patient.phone_no = params[:patient][:phone_no]
+          end 
 
             @patient.save!
 
