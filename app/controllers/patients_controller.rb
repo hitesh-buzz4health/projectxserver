@@ -22,6 +22,7 @@ class PatientsController < ApplicationController
 	       @patient = Patient.new 
          @patient.name = params[:patient][:patient_name]
          @patient.unique_id = params[:patient][:unique_id]
+         @patient.unique_id_type = params[:patient][:unique_id_type]
             if !params[:patient][:date_of_birth].nil?
           	@patient.date_of_birth = params[:patient][:date_of_birth]
             end     
@@ -88,6 +89,12 @@ class PatientsController < ApplicationController
            end
            if !params[:patient][:age].nil?
           	@patient.age = params[:patient][:age]
+           end
+           if !params[:patient][:unique_id].nil?
+            @patient.unique_id = params[:patient][:unique_id]
+           end
+            if !params[:patient][:unique_id_type].nil?
+            @patient.unique_id_type = params[:patient][:unique_id_type]
            end
            if !params[:patient][:sex].nil?
           	@patient.sex = params[:patient][:sex]

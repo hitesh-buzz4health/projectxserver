@@ -17,8 +17,9 @@ class Patient
     field :sex ,                              :type => String
     field :height,                            :type => Integer,  :default => 0
     field :weight,                            :type => Integer,  :default => 0
-
     field :unique_id,                         :type => String
+    field :unique_id_type,                    :type => String
+
 
 
     def as_json(options={})
@@ -31,7 +32,8 @@ class Patient
         :sex => sex,
         :height => height,
         :weight => weight,
-        :unique_id => unique_id
+        :unique_id => unique_id,
+        :unique_id_type => unique_id_type
        
     }
     end  
