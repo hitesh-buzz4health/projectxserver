@@ -10,7 +10,6 @@ class Patient
      has_many :secure_scores  , autosave: true
 
     #do we need surgeon name in this model
-    field :surgeon_name,                      :type => String
     field :name,                              :type => String
     field :date_of_birth,                     :type  => Date
     field :age ,                              :type => Integer,  :default => 0
@@ -26,7 +25,6 @@ class Patient
     def as_json(options={})
     {   
         :_id => id.to_s,
-        :surgeon_name => surgeon_name,
         :name => name,
         :date_of_birth => date_of_birth,
         :age => age,

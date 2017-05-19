@@ -86,7 +86,6 @@ class SurgeriesController < ApplicationController
     surgical_approach  =  SurgicalApproach.find(params[:surgical_approach_id])
 
     if !@surgery.nil? && !params.nil?
-              @surgery.patient_name = params[:patient_name]
               if !params[:date_of_surgery].nil?
                   @surgery.date_of_surgery = params[:date_of_surgery]
               end 
@@ -152,9 +151,6 @@ class SurgeriesController < ApplicationController
 
             @surgery = Surgery.new
 
-             if !params[:date_of_surgery].nil?
-              @surgery.patient_name = params[:patient_name]
-             end 
              if !params[:date_of_surgery].nil?
                 @surgery.date_of_surgery = params[:date_of_surgery]
              end 

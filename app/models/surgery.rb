@@ -12,7 +12,6 @@ class Surgery
 
 
     field :date_of_surgery,                   :type => Date 
-    field :patient_name,                      :type => String
     field :surgery_for,                       :type => String
     field :nature_of_surgery ,                :type => String
     field :type_of_surgery,                   :type => String 
