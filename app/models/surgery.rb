@@ -19,7 +19,21 @@ class Surgery
     field :computer_nav,                      :type => Boolean, :default => false
 
 
+  def as_json(options={})
+  	{
+ 
+     :_id => id.to_s ,
+     :date_of_surgery => date_of_surgery ,
+     :surgery_for => surgery_for,
+     :nature_of_surgery => nature_of_surgery,
+     :type_of_surgery => type_of_surgery,
+     :size_of_implant =>size_of_implant,
+     :computer_nav => computer_nav,
+     :implants => self.knee_implants
 
+
+  	}
+  end 
 
 
 

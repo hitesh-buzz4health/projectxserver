@@ -20,7 +20,7 @@ class SurgeriesController < ApplicationController
                   format.json{
                      render :json =>{ :success => true ,
                             :info => "new surgery  created",
-                            :data => { :surgery => @surgery } } }
+                            :data => { :surgery => @surgery.as_json } } }
                end 
           else 
               #rendering message in case of nil surgery
@@ -62,7 +62,7 @@ class SurgeriesController < ApplicationController
     respond_to do |format|
 		            format.json{
 		               render :json =>{ :success => true ,
-		                      :data => {  :surgery => surgery } } }
+		                      :data => {  :surgery => surgery.as_json } } }
 	  end 
  end 
 
@@ -126,7 +126,7 @@ class SurgeriesController < ApplicationController
                          render :json =>{ :success => true ,
                                 :info => "Surgery info has been updated.",
                                 :data => { 
-                                              :surgery => @surgery } } }
+                                              :surgery => @surgery.as_json } } }
                    end
       else 
              # when patient id is nil 
