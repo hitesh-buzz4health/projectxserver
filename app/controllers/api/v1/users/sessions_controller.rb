@@ -20,13 +20,17 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
             sign_in(:user, resource) 
             resource.assign_authentication_token
             resource.save!
-            render :status => 200,
+
+            if  !resource.preference.nil?
+              pref_id = resource.preference.id.to_s
+             end 
+            render :status => 200,             
             :json => {
                        :success => true,
                       :info => "Logged in",
                       :data => { :auth_token => resource.authentication_token,
                                  :id => resource.id.to_s,
-                                 :pref_id => resource.preference.id.to_s   } }
+                                 :pref_id =>  pref_id  } }
 
             else 
 
