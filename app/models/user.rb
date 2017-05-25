@@ -38,6 +38,9 @@ class User
   field :name,                       type: String
   field :license_no,                 type: String
   field :specialization,             type: String
+  field :registartion_no,            type: String 
+  field :Practising_area_name,       type: String 
+  field :phone_no,                   type: String
   
    def assign_authentication_token
     if authentication_token.nil?

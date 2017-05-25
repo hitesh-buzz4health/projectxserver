@@ -22,7 +22,7 @@ class UsersController < ApplicationController
 			            # @user.safe_update(%w[name email ], params[:user])
                          @user.name = params[:user][:name]
                          @user.email = params[:user][:email]
-
+                        
                         if params[:user][:specialization]
                             @user.specialization = params[:user][:specialization]
                         end 
@@ -39,6 +39,15 @@ class UsersController < ApplicationController
                         
 			            #assigning auth_token at the time of registration
 			            @user.assign_authentication_token
+			            if !params[:user][:registartion_no].nil?
+                           @user.registartion_no = params[:user][:registartion_no]
+			            end 
+			            if !params[:user][:Practising_area_name].nil?
+                           @user.Practising_area_name = params[:user][:Practising_area_name]
+			            end 
+			            if !params[:user][:phone_no].nil?
+                           @user.phone_no = params[:user][:phone_no]
+			            end 
 			            success = @user && @user.save
 			            if success && @user.errors.empty?
 			              
@@ -60,7 +69,10 @@ class UsersController < ApplicationController
 			                     :json => { :success => true,
 			                                :info => "Successfully Registered! Please check you email for password",
 			                                :data => { :auth_token => @user.authentication_token,
-			                                          :id => @user.id.to_s
+			                                          :id => @user.id.to_s,
+			                                          :name => @user.name,
+			                                          :Practising_area_name =>@user.Practising_area_name
+
 			                                            } }
 
 			            else

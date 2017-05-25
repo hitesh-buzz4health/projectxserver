@@ -30,6 +30,8 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
                       :info => "Logged in",
                       :data => { :auth_token => resource.authentication_token,
                                  :id => resource.id.to_s,
+                                 :name => resource.name,
+                                 :Practising_area_name => resource.Practising_area_name,
                                  :pref_id =>  pref_id  } }
 
             else 
