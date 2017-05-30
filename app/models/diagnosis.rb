@@ -22,8 +22,7 @@ field :image_tags          ,     :type => Array
      :diagnosis_outcome => diagnosis_outcome,
      :image_tags => image_tags ,   
      :medical_images => self.medical_images.to_json()
-   
-
+  
 
  }
  end 

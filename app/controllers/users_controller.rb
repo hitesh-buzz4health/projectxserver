@@ -2,7 +2,7 @@ class UsersController < ApplicationController
  skip_before_action :verify_authenticity_token,
                  :if => Proc.new { |c| c.request.format == 'application/json' }
 
-  skip_before_action :authenticate_user_from_token!
+  skip_before_action :authenticate_user_from_token!, :only =>  [:create]
 
     def index
     
@@ -39,15 +39,19 @@ class UsersController < ApplicationController
                         
 			            #assigning auth_token at the time of registration
 			            @user.assign_authentication_token
-			            if !params[:user][:registartion_no].nil?
-                           @user.registartion_no = params[:user][:registartion_no]
+			            if !params[:user][:license_no].nil?
+                           @user.license_no = params[:user][:license_no]
 			            end 
 			            if !params[:user][:Practising_area_name].nil?
-                           @user.Practising_area_name = params[:user][:Practising_area_name]
+                           @user.practising_area_name = params[:user][:Practising_area_name]
 			            end 
 			            if !params[:user][:phone_no].nil?
                            @user.phone_no = params[:user][:phone_no]
 			            end 
+
+			            
+                         @user.profile_pic =  create_profile_pic params[:user][:name]
+                          	
 			            success = @user && @user.save
 			            if success && @user.errors.empty?
 			              
@@ -68,10 +72,7 @@ class UsersController < ApplicationController
 			              render :status => :ok,
 			                     :json => { :success => true,
 			                                :info => "Successfully Registered! Please check you email for password",
-			                                :data => { :auth_token => @user.authentication_token,
-			                                          :id => @user.id.to_s,
-			                                          :name => @user.name,
-			                                          :Practising_area_name =>@user.Practising_area_name
+			                                :data => {  :user => @user.as_json
 
 			                                            } }
 
@@ -97,7 +98,60 @@ class UsersController < ApplicationController
 			      }
 	    end
 
-    end              
+    end    
+
+    def  get_surgeries_list
+
+            patient_ids = Patient.where(:user_ids => current_user.id).only([:id])
+            patient_ids = patient_ids.map { |b| b.id }.uniq
+            surgery_list = Surgery.where(:patient_id.in => patient_ids ).page(params[:page]).desc(:date_of_surgery)
+
+	    #   #rendering status
+	      render :status => :ok,
+                 :json => { :success => true,
+                            :info => "list of surgeries",
+                            :data => { :surgeries => surgery_list.as_json({:surgery_list => true})
+                                      } }
+
+         
+
+    end       
+
+
+
+    def get_scores_list	
+          
+          patient_ids = Patient.where(:user_ids => current_user.id).only([:id])
+          patient_ids = patient_ids.map { |b| b.id }.uniq
+          secure_scores = SecureScore.where(:patient_id.in => patient_ids).page(params[:page]).desc(:score_date)
+       #   #rendering status
+	      render :status => :ok,
+                 :json => { :success => true,
+                            :info => "list of surgeries",
+                            :data => { :scores_list => secure_scores.as_json({:answer => false})
+                                      } } 
+
+
+
+    end     
+
+
+private 
+
+      def create_profile_pic name 
+
+      	if name.split(" ").count == 2 
+	         first_name = (name.split(" ")[0]).chars.first
+	         last_name =(name.split(" ")[1]).chars.first
+	         return"http://res.cloudinary.com/dbnr8a17c/image/upload/l_text:Lato_90_regular:#{first_name.upcase}%20#{last_name.upcase},co_rgb:ffffff/v1496148664/Doctor_Profile_BG_sscswd.png"
+         else
+            first_name = (name.split(" ")[0]).chars.first
+            return "http://res.cloudinary.com/dbnr8a17c/image/upload/l_text:Lato_160_regular:#{first_name.upcase},co_rgb:ffffff/v1496148664/Doctor_Profile_BG_sscswd.png"
+     
+         end 
+
+
+      end 
 
 
 end 

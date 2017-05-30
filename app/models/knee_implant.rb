@@ -19,7 +19,7 @@ class KneeImplant < Implant
 
  def as_json(options={})
  { 
- :_id => id.to_s ,
+    :_id => id.to_s ,
    :brand_name => brand_name ,
    :type_of_implant => type_of_implant,
    :side_implant_used => side_implant_used,

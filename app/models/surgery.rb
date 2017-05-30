@@ -9,6 +9,7 @@ class Surgery
  belongs_to :patient 
  has_and_belongs_to_many :knee_implants , autosave: true 
  belongs_to :diagnosis , autosave: true 
+ paginates_per 25
 
 
     field :date_of_surgery,                   :type => Date 
@@ -20,9 +21,21 @@ class Surgery
 
 
   def as_json(options={})
+
+    if options[:surgery_list]
   	{
- 
+
      :_id => id.to_s ,
+     :date_of_surgery => date_of_surgery ,
+     :type_of_surgery => type_of_surgery
+
+
+  	}
+   
+  else
+    {
+
+       :_id => id.to_s ,
      :date_of_surgery => date_of_surgery ,
      :surgery_for => surgery_for,
      :nature_of_surgery => nature_of_surgery,
@@ -32,9 +45,9 @@ class Surgery
      :implants => self.knee_implants
 
 
-  	}
+  }
   end 
-
+end 
 
 
 

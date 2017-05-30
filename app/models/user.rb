@@ -17,7 +17,9 @@ class User
 
   
   ## Database authenticatable
-  field :email,              type: String, default: ""
+  field :email,              type: String
+
+
   field :encrypted_password, type: String, default: ""
 
   ## Recoverable
@@ -38,9 +40,16 @@ class User
   field :name,                       type: String
   field :license_no,                 type: String
   field :specialization,             type: String
-  field :registartion_no,            type: String 
-  field :Practising_area_name,       type: String 
+  field :practising_area_name,       type: String 
   field :phone_no,                   type: String
+  field :profile_pic ,          type: String
+
+  index({email: 1 } , {unique: true})
+  index({name: 1 } )
+  index({authentication_token: 1 } )
+
+
+
   
    def assign_authentication_token
     if authentication_token.nil?
@@ -66,6 +75,18 @@ class User
       end 
   end 
 
+  def as_json(options={})
+  {
+      :_id => id.to_s ,
+      :authentication_token => authentication_token ,
+      :name => name ,
+      :license_no => license_no ,
+      :Practising_area_name => practising_area_name,
+      :phone_no => phone_no ,
+      :profile_pic => profile_pic
+
+  }
+ end 
  
  
 

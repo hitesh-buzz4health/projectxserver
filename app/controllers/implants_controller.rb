@@ -51,12 +51,9 @@ class ImplantsController < ApplicationController
           @implant.femur_stem = params[:femur_stem]
      	end 
 
-          # @implant.surgeries << surgery 
           @implant.save!
 
-          # surgery.implants << @implant
-          # surgery.save!
-
+        
 
      	#responding saving implant info 
           respond_to do |format|

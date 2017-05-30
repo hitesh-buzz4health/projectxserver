@@ -9,8 +9,14 @@ class Answer
   belongs_to :option      
   
 
+  def as_json(options={}){
+     
+     :_id => id.to_s,
+     :question => self.question.as_json ,
+     :option => self.option.as_json
 
-
+  }
+  end 
 
 
 end 

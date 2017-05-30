@@ -6,9 +6,9 @@ class Preference
     #Associations
     belongs_to :user 
     
-    field :brand_name,                       :type => String
-    field :type_of_implant,                  :type => String
-    field :surgery_type,                :type => String
+    field :brand_name,                :type => String
+    field :type_of_implant,           :type => String
+    field :surgery_type,              :type => String
     field :surgical_approach,         :type => String
     field :weight_unit,               :type => String
     field :computer_nav ,             type: Boolean, :default => false

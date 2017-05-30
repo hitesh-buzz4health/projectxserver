@@ -17,10 +17,12 @@ class PatientsController < ApplicationController
 
 	def create 
 
-	    if !params[:patient][:patient_name].nil? && !params[:patient][:unique_id].nil?
+	    if !params[:patient][:patient_name].nil? && !params[:patient][:unique_id].nil? && !params[:patient][:unique_id_type].nil?
+          
 
 	       @patient = Patient.new 
          @patient.name = params[:patient][:patient_name]
+         @patient.profile_pic = create_profile_pic params[:patient][:patient_name]
          @patient.unique_id = params[:patient][:unique_id]
          @patient.unique_id_type = params[:patient][:unique_id_type]
             if !params[:patient][:date_of_birth].nil?
@@ -37,9 +39,6 @@ class PatientsController < ApplicationController
             end
             if !params[:patient][:weight].nil?
           	@patient.weight = params[:patient][:weight] 
-            end
-            if !params[:patient][:score].nil?
-          	 @patient.height = params[:patient][:score]
             end
             if !params[:patient][:email_id].nil?
              @patient.email_id = params[:patient][:email_id]
@@ -89,6 +88,7 @@ class PatientsController < ApplicationController
        if !@patient.nil?
        	   if !params[:patient][:patient_name].nil?
                @patient.name = params[:patient][:patient_name]
+               @patient.profile_pic = create_profile_pic params[:patient][:patient_name]
        	   end 
            if !params[:patient][:date_of_birth].nil?
           	@patient.date_of_birth = params[:patient][:date_of_birth]
@@ -111,9 +111,7 @@ class PatientsController < ApplicationController
            if !params[:patient][:weight].nil?
           	@patient.weight = params[:patient][:weight]
            end
-           if !params[:patient][:score].nil?
-          	 @patient.height = params[:patient][:score]
-          end
+         
           if !params[:patient][:email_id].nil?
              @patient.email_id = params[:patient][:email_id]
           end
@@ -210,7 +208,7 @@ class PatientsController < ApplicationController
   end 
 
 
-def  list_of_secure_scores
+def  get_secure_scores
 
       patient = Patient.find(params[:patient_id])
 
@@ -270,7 +268,28 @@ def saving_answers_for_score  answers , secure_score
    end 
 
 
-end  
+end 
+
+
+
+
+
+
+private 
+
+      def create_profile_pic name 
+
+        if name.split(" ").count == 2 
+           first_name = (name.split(" ")[0]).chars.first
+           last_name =(name.split(" ")[1]).chars.first
+           return"http://res.cloudinary.com/dbnr8a17c/image/upload/l_text:Lato_90_regular:#{first_name.upcase}%20#{last_name.upcase},co_rgb:ffffff/v1496148670/Patient_Profile_BG_g1fxub.png"
+        else    first_name = (name.split(" ")[0]).chars.first
+            return "http://res.cloudinary.com/dbnr8a17c/image/upload/l_text:Lato_150_regular:#{first_name.upcase},co_rgb:ffffff//v1496148670/Patient_Profile_BG_g1fxub.png"
+     
+        end 
+
+
+      end  
 
 end 
 

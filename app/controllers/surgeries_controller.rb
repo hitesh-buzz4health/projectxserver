@@ -230,6 +230,42 @@ class SurgeriesController < ApplicationController
 
 
 
+   def get_surgery_and_patient_info 
+
+
+      surgery = Surgery.find(params[:id])
+
+      if !surgery.nil?
+
+         respond_to do |format|
+
+                              format.json{
+                                 render :json =>{ :success => true ,
+                                        :info => "Surgery info .",
+                                        :data => {    :patient => surgery.patient.as_json,
+                                                      :surgery => surgery.as_json } } }
+           end
+
+
+      else 
+
+                  respond_to do |format|
+
+                              format.json{
+                                 render :json =>{ :success => true ,
+                                        :info => "NO related surgery found."
+                                            } }
+                    end
+
+
+      end
+
+   end 
+
+
+
+
+
 
 end 
 

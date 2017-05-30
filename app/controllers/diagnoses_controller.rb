@@ -3,7 +3,8 @@ class DiagnosesController < ApplicationController
 
 
  def create 
-        patient = Patient.find(params[:patient_id])
+      
+       patient = Patient.find(params[:patient_id])
    if !patient.nil?
       diagnosis = Diagnosis.new 
       if !params[:diagnoses][:diagnosis_outcome].nil?
@@ -21,28 +22,28 @@ class DiagnosesController < ApplicationController
       end 
       if !params[:diagnoses][:pre_op_images].nil?
       	 count_pre_op_images = params[:diagnoses][:pre_op_images].length;
-      	 #uploading prop images 
+      	 #uploading preop images 
          count_pre_op_images.times do | count_preop|
          	medical_image = MedicalImage.new
          	medical_image.image_tags =  tags_array
          	medical_image.image_type = "preop"
-            medical_image.upload(params[:diagnoses][:pre_op_images][count_preop] ,tags_array)
-            medical_image.diagnosis = diagnosis
-            medical_image.save!
+          medical_image.upload(params[:diagnoses][:pre_op_images][count_preop] ,tags_array)
+          medical_image.diagnosis = diagnosis
+          medical_image.save!
          end 
 
       end 
 
        if !params[:diagnoses][:post_op_images].nil?
       	 count_post_op_images = params[:diagnoses][:post_op_images].length;
-      	 #uploading prop images 
+      	 #uploading pop images 
          count_post_op_images.times do | count_post|
          	medical_image = MedicalImage.new
          	medical_image.image_tags =  tags_array
-         	medical_image.image_type = "preop"
-            medical_image.upload(params[:diagnoses][:post_op_images][count_post] ,tags_array)
-            medical_image.diagnosis = diagnosis
-            medical_image.save!
+         	medical_image.image_type = "postop"
+          medical_image.upload(params[:diagnoses][:post_op_images][count_post] ,tags_array)
+          medical_image.diagnosis = diagnosis
+          medical_image.save!
          end 
 
       end 
@@ -102,7 +103,7 @@ class DiagnosesController < ApplicationController
          count_post_op_images.times do | count_post|
          	medical_image = MedicalImage.new
          	medical_image.image_tags =  tags_array
-         	medical_image.image_type = "preop"
+         	medical_image.image_type = "postop"
             medical_image.upload(params[:diagnoses][:post_op_images][count_post] ,diagnosis.image_tags)
             medical_image.diagnosis = diagnosis
             medical_image.save!

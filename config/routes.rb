@@ -38,8 +38,12 @@ end
     #defining routes for getting scores with 
      get '/get_score_with_type' => 'scores#with_type_of_score'
      post '/creating_patient_secure_score' => 'patients#creating_patient_secure_score'
-     get  '/list_of_scores' => 'patients#list_of_secure_scores'
+     get  '/list_of_scores' => 'patients#get_secure_scores'
      get  '/current_user_preference' => 'preferences#get_current_user_preference'
+     get  '/all_surgeries' => 'users#get_surgeries_list'
+     get  '/all_scores' => 'users#get_scores_list'
+     get   '/surgery_detail/:id' => 'surgeries#get_surgery_and_patient_info'
+
        
   # root 'surgeons#index'
 end

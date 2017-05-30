@@ -19,7 +19,8 @@ class Patient
     field :unique_id,                         :type => String
     field :unique_id_type,                    :type => String
     field :email_id,                          :type =>  String
-    field :phone_no,                          :type => Integer,  :default => 0                   
+    field :phone_no,                          :type => Integer,  :default => 0   
+    field :profile_pic,                       :type => String                
 
 
     def as_json(options={})
@@ -34,7 +35,8 @@ class Patient
         :unique_id => unique_id,
         :unique_id_type => unique_id_type,
         :email_id => email_id ,
-        :phone_no => phone_no
+        :phone_no => phone_no ,
+        :profile_pic => profile_pic
     }
     end  
 

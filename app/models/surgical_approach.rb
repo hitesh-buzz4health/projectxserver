@@ -5,7 +5,7 @@ class SurgicalApproach
     
   has_many  :surgeries , autosave: true
 
-  field :name,                   :type => String
+  field :name,                :type => String
   field :surgery_type,        :type => String 
 
 

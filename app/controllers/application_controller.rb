@@ -26,9 +26,7 @@ skip_before_action :verify_authenticity_token,
   #for authenticating the token 
   def authenticate_user_from_token!
     user_id = params[:user_id].presence
-    puts user_id
     user       = user_id && User.find_by_id(user_id)
-    puts user
     if user && Devise.secure_compare(user.authentication_token, params[:auth_token])
       sign_in user, store: false
       @current_user = user 
