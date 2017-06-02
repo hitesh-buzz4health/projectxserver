@@ -31,7 +31,7 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
                       :data => { :auth_token => resource.authentication_token,
                                  :id => resource.id.to_s,
                                  :name => resource.name,
-                                 :Practising_area_name => resource.Practising_area_name,
+                                 :practising_area_name => resource.practising_area_name,
                                  :pref_id =>  pref_id  } }
 
             else 
