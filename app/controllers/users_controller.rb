@@ -119,8 +119,8 @@ class UsersController < ApplicationController
 	      render :status => :ok,
                  :json => { :success => true,
                             :info => "list of surgeries",
-                            :data => { :surgeries => surgery_list.as_json({:surgery_list => true})
-                                      } }
+                            :surgeries => surgery_list.as_json({:surgery_list => true})
+                                       }
 
          
 
@@ -137,8 +137,8 @@ class UsersController < ApplicationController
 	      render :status => :ok,
                  :json => { :success => true,
                             :info => "list of surgeries",
-                            :data => { :scores_list => secure_scores.as_json({:answer => false})
-                                      } } 
+                             :scores_list => secure_scores.as_json({:answer => false})
+                                       } 
 
 
 

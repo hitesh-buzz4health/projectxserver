@@ -242,8 +242,8 @@ class SurgeriesController < ApplicationController
                               format.json{
                                  render :json =>{ :success => true ,
                                         :info => "Surgery info .",
-                                        :data => {    :patient => surgery.patient.as_json,
-                                                      :surgery => surgery.as_json } } }
+                                        :patient => surgery.patient.as_json,
+                                         :surgery => surgery.as_json  } }
            end
 
 
