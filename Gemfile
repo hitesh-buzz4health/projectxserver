@@ -60,3 +60,10 @@ gem 'cloudinary'
 gem 'uuidtools'
 
 gem 'kaminari'
+
+# used for sending mails
+gem  'gmail'
+
+# used for threads 
+gem 'workers'
+

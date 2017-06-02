@@ -32,7 +32,16 @@ class UsersController < ApplicationController
 			            else
 			              @user.password              = lookup_hash[0,6]
 			              @user.password_confirmation = lookup_hash[0,6]
+			              
 			            end
+
+			            worker = Workers::Worker.new
+
+			              worker.perform do
+
+			             	 send_password_mail params[:user][:email] , lookup_hash[0,6]
+
+			             end
 			             #we have to  see wether we have to send password through mail or not.
                           
 			          
@@ -149,6 +158,30 @@ private
             return "http://res.cloudinary.com/dbnr8a17c/image/upload/l_text:Lato_160_regular:#{first_name.upcase},co_rgb:ffffff/v1496148664/Doctor_Profile_BG_sscswd.png"
      
          end 
+
+
+      end 
+
+      def send_password_mail email , password
+      	gmail = Gmail.connect("aishi.rastofi@buzz4health.com", "whitebutter")
+
+        email_body = "Please use this Following password for future reference\n" + password.to_s
+      	email = gmail.compose do
+
+				  to  email
+				  from    "buzz4health"
+				  subject   "Please use this password to login"
+				  
+				  #for adding html template 
+				  html_part do
+
+					    content_type 'text/html; charset=UTF-8'
+					    body  email_body
+				   end
+
+	       end
+
+	       email.deliver!
 
 
       end 

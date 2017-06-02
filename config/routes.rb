@@ -36,7 +36,8 @@ end
 
      resources  :static_data
     #defining routes for getting scores with 
-     get '/get_score_with_type' => 'scores#with_type_of_score'
+     get '/get_score_with_type' => 'scores#get_with_type_of_score'
+     get '/get_score_with_anatomy' => 'scores#get_with_type_of_anatomy'
      post '/creating_patient_secure_score' => 'patients#creating_patient_secure_score'
      get  '/list_of_scores' => 'patients#get_secure_scores'
      get  '/current_user_preference' => 'preferences#get_current_user_preference'
