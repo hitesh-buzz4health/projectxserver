@@ -32,7 +32,8 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
                                  :id => resource.id.to_s,
                                  :name => resource.name,
                                  :practising_area_name => resource.practising_area_name,
-                                 :pref_id =>  pref_id  } }
+                                 :pref_id =>  pref_id,
+                                 :profile_pic => resource.profile_pic} }
 
             else 
 
