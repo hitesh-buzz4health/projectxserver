@@ -137,7 +137,7 @@ class UsersController < ApplicationController
 	      render :status => :ok,
                  :json => { :success => true,
                             :info => "list of surgeries",
-                             :scores_list => secure_scores.as_json({:answer => false})
+                             :score => secure_scores.as_json({:answer => false})
                                        } 
 
 
