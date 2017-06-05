@@ -271,6 +271,18 @@ def saving_answers_for_score  answers , secure_score
 end 
 
 
+def get_list_of_score 
+    
+    score_list = SecureScore.where(:patient_id => params[:id])
+    respond_to do |format|
+
+                format.json{
+                   render :json =>{ :success => true ,
+                          :info => "creation of secure score",
+                          :score => score_list.as_json({:answer => false}) } }
+    end 
+
+end 
 
 
 

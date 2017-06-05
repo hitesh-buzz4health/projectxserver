@@ -42,6 +42,7 @@ class Surgery
      :type_of_surgery => type_of_surgery,
      :size_of_implant =>size_of_implant,
      :computer_nav => computer_nav,
+     :surgical_approach => self.surgical_approach,
      :implants => self.knee_implants
 
 

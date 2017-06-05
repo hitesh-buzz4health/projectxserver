@@ -44,6 +44,8 @@ end
      get  '/all_surgeries' => 'users#get_surgeries_list'
      get  '/all_scores' => 'users#get_scores_list'
      get   '/surgery_detail/:id' => 'surgeries#get_surgery_and_patient_info'
+     get   '/score_list_by_patient/:id' => 'patients#get_list_of_score'
+
 
        
   # root 'surgeons#index'
