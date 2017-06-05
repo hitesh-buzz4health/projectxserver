@@ -53,3 +53,17 @@ gem 'mongoid'
 
 #devise gem for managing user 
 gem 'devise', '~>4.2.0'
+
+#for images 
+gem 'cloudinary'
+#utils 
+gem 'uuidtools'
+
+gem 'kaminari'
+
+# used for sending mails
+gem  'gmail'
+
+# used for threads 
+gem 'workers'
+

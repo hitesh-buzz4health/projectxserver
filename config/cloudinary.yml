@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: dbnr8a17c
+  api_key: '713279772285829'
+  api_secret: wVxCrfQ7YgEWLuepVzSR-SdKmOo
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: dbnr8a17c
+  api_key: '713279772285829'
+  api_secret: wVxCrfQ7YgEWLuepVzSR-SdKmOo
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: dbnr8a17c
+  api_key: '713279772285829'
+  api_secret: wVxCrfQ7YgEWLuepVzSR-SdKmOo
+  enhance_image_tag: true
+  static_image_support: false
