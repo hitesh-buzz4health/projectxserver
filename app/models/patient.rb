@@ -24,8 +24,8 @@ class Patient
 
   # searchable for solar
   searchable do 
-    text :name
-    text :email_id 
+    text :name , :stored => true
+    text :email_id , :stored => true
   end 
 
   after_save { |obj| Sunspot.index!(obj) }
