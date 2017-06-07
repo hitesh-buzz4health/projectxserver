@@ -45,7 +45,7 @@ class Patient
         :email_id => email_id ,
         :phone_no => phone_no ,
         :profile_pic => profile_pic,
-        :surgery => self.surgeries.as_json({:surgery_list => true})
+        :surgeries => self.surgeries.as_json({:surgery_list => true})
     }
     end  
 
