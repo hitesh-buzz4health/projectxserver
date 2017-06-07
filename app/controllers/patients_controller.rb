@@ -284,6 +284,19 @@ def get_list_of_score
 
 end 
 
+def get_surgeries_list
+
+  surgery_list = Surgery.where(:patient_id => params[:id] ).page(params[:page]).desc(:date_of_surgery)
+  respond_to do |format|
+
+                  format.json{
+                     render :json =>{ :success => true ,
+                            :info => "surgeries list",
+                            :surgery => surgery_list.as_json({:surgery_list => true }) } }
+      end 
+
+end 
+
 def get_patient_by_query 
 
   query = params[:query]
