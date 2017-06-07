@@ -1,7 +1,7 @@
 class Patient
   include Mongoid::Document
   include Mongoid::Timestamps
-
+  include Sunspot::Mongo
      #Associations
      has_and_belongs_to_many :users , autosave: true
      has_many :surgeries , autosave: true
@@ -22,6 +22,14 @@ class Patient
     field :phone_no,                          :type => Integer,  :default => 0   
     field :profile_pic,                       :type => String                
 
+  # searchable for solar
+  searchable do 
+    text :name
+    text :email_id 
+  end 
+
+  after_save { |obj| Sunspot.index!(obj) }
+  after_destroy {|obj| obj.remove_from_index; Sunspot.commit}
 
     def as_json(options={})
     {   

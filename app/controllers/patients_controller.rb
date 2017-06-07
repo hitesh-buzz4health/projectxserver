@@ -284,7 +284,22 @@ def get_list_of_score
 
 end 
 
+def get_patient_by_query 
 
+  query = params[:query]
+  list = Sunspot.search [Patient] do
+    fulltext query
+    paginate(:page => params[:page], :per_page => 15)
+  end
+ respond_to do |format|
+
+                format.json{
+                   render :json =>{ :success => true ,
+                          :info => "list of related patients",
+                          :lsit => list.results.as_json } }
+    end 
+
+end 
 
 
 private 
