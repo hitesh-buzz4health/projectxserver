@@ -296,7 +296,7 @@ def get_patient_by_query
                 format.json{
                    render :json =>{ :success => true ,
                           :info => "list of related patients",
-                          :lsit => list.results.as_json } }
+                          :list => list.results.as_json } }
     end 
 
 end 
