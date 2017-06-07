@@ -21,7 +21,7 @@ class UsersController < ApplicationController
 			            # @user.phone_number          = params[:user][:phone_number]
 			            # @user.safe_update(%w[name email ], params[:user])
                          @user.name = params[:user][:name]
-                         @user.email = params[:user][:email]
+                         @user.email = params[:user][:email].downcase
                         
                         if params[:user][:specialization]
                             @user.specialization = params[:user][:specialization]
@@ -39,7 +39,7 @@ class UsersController < ApplicationController
 
 			              worker.perform do
 
-			             	 send_password_mail params[:user][:email] , lookup_hash[0,6]
+			             	 send_password_mail params[:user][:email].downcase , lookup_hash[0,6]
 
 			             end
 			             #we have to  see wether we have to send password through mail or not.
