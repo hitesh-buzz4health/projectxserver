@@ -4,6 +4,7 @@ class Surgery
    include Mongoid::Timestamps
 
  belongs_to :surgical_approach , autosave: true
+ has_and_belongs_to_many :secure_scores , autosave: true
    
 # Associations  
  belongs_to :patient 

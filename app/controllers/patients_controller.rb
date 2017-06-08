@@ -168,17 +168,28 @@ class PatientsController < ApplicationController
 
 
 
-  def creating_patient_secure_score
+  def creating_secure_score
 
     score = Score.find(params[:score_id])
-    patient = Patient.find(params[:patient_id])
-    
+    if !params[:surgery_id].nil?
+     surgery = Surgery.find(params[:surgery_id])
+    end
+    if params[:patient_id] 
+     patient = Patient.find(params[:patient_id])
+    elsif !surgery.nil?
+     patient = surgery.patient
+    end
     if !score.nil? && !patient.nil?
     
       secure_score  = SecureScore.new 
       secure_score.patient_score = params[:secure_score][:patient_score]
       secure_score.score_date = params[:secure_score][:score_date]
-      saving_answers_for_score params[:secure_score][:answers] , secure_score
+      if !params[:secure_score][:answers].nil?
+       saving_answers_for_score params[:secure_score][:answers] , secure_score
+      end 
+      if !surgery.nil?
+      secure_score.surgeries << surgery
+      end 
       secure_score.patient = patient
       secure_score.score = score 
       secure_score.save!
