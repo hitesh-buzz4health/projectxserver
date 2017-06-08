@@ -45,7 +45,7 @@ class Patient
         :email_id => email_id ,
         :phone_no => phone_no ,
         :profile_pic => profile_pic,
-        :surgeries => self.surgeries.count
+        :surgeries_count => self.surgeries.count
     }
     end  
 
