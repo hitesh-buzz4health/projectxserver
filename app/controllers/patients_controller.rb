@@ -292,7 +292,7 @@ def get_surgeries_list
                   format.json{
                      render :json =>{ :success => true ,
                             :info => "surgeries list",
-                            :surgery => surgery_list.as_json({:surgery_list => true }) } }
+                            :surgeries => surgery_list.as_json({:surgery_list => true }) } }
       end 
 
 end 
@@ -309,7 +309,8 @@ def get_patient_by_query
                 format.json{
                    render :json =>{ :success => true ,
                           :info => "list of related patients",
-                          :list => list.results.as_json } }
+                          :list => list.results.as_json
+                           } }
     end 
 
 end 
