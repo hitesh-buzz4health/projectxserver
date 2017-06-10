@@ -31,6 +31,12 @@ class Patient
   after_save { |obj| Sunspot.index!(obj) }
   after_destroy {|obj| obj.remove_from_index; Sunspot.commit}
 
+
+
+ # defining indexes 
+  index({age: 1 } )
+
+
     def as_json(options={})
     {   
         :_id => id.to_s,

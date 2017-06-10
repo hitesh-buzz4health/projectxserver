@@ -19,6 +19,11 @@ class Surgery
     field :type_of_surgery,                   :type => String 
     field :size_of_implant,                   :type => Integer,  :default => 0
     field :computer_nav,                      :type => Boolean, :default => false
+  
+
+     index({nature_of_surgery: 1 } )
+
+
 
 
   def as_json(options={})

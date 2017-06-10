@@ -48,6 +48,16 @@ end
      get   '/search_by_patient' => 'patients#get_patient_by_query'
      get   '/list_of_surgeries_by_patient/:id' => 'patients#get_surgeries_list'
 
+     # analytics 
+     get 'get_implant_brands_against_revision_surgery' => 'analytics#get_implant_brands_against_revision_surgery'
+     get 'get_implant_brands_against_primary_surgery' => 'analytics#get_implant_brands_against_primary_surgery'
+     get 'get_primary_vs_revision_surgery' => 'analytics#get_primary_vs_revision_surgery'
+     get 'get_patients_by_age_and_surgeries' => 'analytics#get_patients_by_age_and_surgeries'
+     get 'get_patients_by_implant_brand_vs_score' => 'analytics#get_patients_by_implant_brand_vs_score'
+
+
+
+
        
   # root 'surgeons#index'
 end
