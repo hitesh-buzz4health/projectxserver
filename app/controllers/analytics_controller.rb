@@ -14,8 +14,8 @@ class AnalyticsController < ApplicationController
 	                format.json{
 	                   render :json =>{ :success => true ,
 	                          :info => "implant vs Revision Surgery",
-	                          :list => list ,
-	                          :total_surgeries => surgery_ids.count } }
+	                          :list => list 
+	                          } }
 	    end 
  
 
@@ -34,9 +34,9 @@ class AnalyticsController < ApplicationController
 
 	                format.json{
 	                   render :json =>{ :success => true ,
-	                          :info => "",
-	                          :list => list,
-	                          :total_surgeries => surgery_ids.count } }
+	                          :info => "implant vs revision surgery",
+	                          :list => list
+	                         } }
 	    end 
  
 	end 
@@ -52,7 +52,7 @@ class AnalyticsController < ApplicationController
 
 	                format.json{
 	                   render :json =>{ :success => true ,
-	                          :info => "",
+	                          :info => "revision vs primary surgery",
 	                          :primary_surgery_count => primary_surgery_count,
 	                          :revision_surgery_count => revision_surgery_count,
 	                          :surgery_count  => surgery_count } }
@@ -101,7 +101,7 @@ class AnalyticsController < ApplicationController
 			                format.json{
 			                   render :json =>{ :success => true ,
 			                          :info => "Getting  implant vs score ",
-			                          :data   => response_hash } }
+			                          :data   => response_hash.map{|k,v| {"implant_brand"=>k, "score" => v}} } }
 		  end 
 
 
