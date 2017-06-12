@@ -78,8 +78,8 @@ class User
 
   def as_json(options={})
   {
-      :_id => id.to_s ,
-      :authentication_token => authentication_token ,
+      :id => id.to_s ,
+      :auth_token => authentication_token ,
       :name => name ,
       :license_no => license_no ,
       :Practising_area_name => practising_area_name,
