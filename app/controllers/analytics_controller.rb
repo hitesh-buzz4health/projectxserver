@@ -7,13 +7,13 @@ class AnalyticsController < ApplicationController
       surgery_ids = Surgery.where(:patient_id.in => patient_ids , :nature_of_surgery => "Revision" ).only([:id])
       surgery_ids = surgery_ids.map { |b| b.id }.uniq
       implant_type = KneeImplant.where(:surgery_ids.in => surgery_ids).only([:brand_name]).group_by{|item| item["brand_name"]}
-      list = implant_type.map {|k,v| [k, v.length]}
+      list = implant_type.map {|k,v| {"brand_name" => k , "count" =>v.length }}
 
 	     respond_to do |format|
 
 	                format.json{
 	                   render :json =>{ :success => true ,
-	                          :info => " ",
+	                          :info => "implant vs Revision Surgery",
 	                          :list => list ,
 	                          :total_surgeries => surgery_ids.count } }
 	    end 
@@ -28,7 +28,7 @@ class AnalyticsController < ApplicationController
       surgery_ids = Surgery.where(:patient_id.in => patient_ids , :nature_of_surgery => "Primary" ).only([:id])
       surgery_ids = surgery_ids.map { |b| b.id }.uniq
       implant_type = KneeImplant.where(:surgery_ids.in => surgery_ids).only([:brand_name]).group_by{|item| item["brand_name"]}
-      list = implant_type.map {|k,v| [k, v.length]}
+      list = implant_type.map {|k,v| {"brand_name" => k , "count" =>v.length }}
 
 	     respond_to do |format|
 
