@@ -101,7 +101,7 @@ class AnalyticsController < ApplicationController
 			                format.json{
 			                   render :json =>{ :success => true ,
 			                          :info => "Getting  implant vs score ",
-			                          :data   => response_hash.map{|k,v| {"implant_brand"=>k, "score" => v}} } }
+			                          :list   => response_hash.map{|k,v| {"implant_brand"=>k, "score" => v}} } }
 		  end 
 
 
