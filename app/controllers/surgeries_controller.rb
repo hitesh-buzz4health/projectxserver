@@ -166,7 +166,7 @@ class SurgeriesController < ApplicationController
              if !params[:computer_nav].nil?
                 @surgery.computer_nav = params[:computer_nav]
              end 
-
+             @surgery.user = current_user 
              @surgery.patient = patient
              @surgery.surgical_approach = surgical_approach
              @surgery.diagnosis = diagnosis

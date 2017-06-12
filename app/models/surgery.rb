@@ -7,7 +7,8 @@ class Surgery
  has_and_belongs_to_many :secure_scores , autosave: true
    
 # Associations  
- belongs_to :patient 
+ belongs_to :patient , autosave: true
+ belongs_to :user ,    autosave: true
  has_and_belongs_to_many :knee_implants , autosave: true 
  belongs_to :diagnosis , autosave: true 
  paginates_per 25

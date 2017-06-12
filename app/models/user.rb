@@ -6,6 +6,7 @@ class User
   #Associations 
   has_one :preference
   has_and_belongs_to_many :patients , autosave: true
+  has_many :surgeries     , autosave: true
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
