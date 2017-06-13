@@ -19,49 +19,64 @@ class PatientsController < ApplicationController
 
 	    if !params[:patient][:patient_name].nil? && !params[:patient][:unique_id].nil? && !params[:patient][:unique_id_type].nil?
           
+         @patient = Patient.where(:unique_id => params[:patient][:unique_id] , :unique_id_type => params[:patient][:unique_id_type]).first
+         if @patient.nil?
+        	       @patient = Patient.new 
+                 @patient.name = params[:patient][:patient_name]
+                 @patient.profile_pic = create_profile_pic params[:patient][:patient_name]
+                 @patient.unique_id = params[:patient][:unique_id]
+                 @patient.unique_id_type = params[:patient][:unique_id_type]
+                    if !params[:patient][:date_of_birth].nil?
+                  	@patient.date_of_birth = params[:patient][:date_of_birth]
+                    end     
+                    if !params[:patient][:age].nil?
+                  	@patient.age = params[:patient][:age]
+                    end
+                    if !params[:patient][:sex].nil?
+                  	@patient.sex = params[:patient][:sex]
+                    end
+                    if !params[:patient][:height].nil?
+                  	@patient.height = params[:patient][:height]
+                    end
+                    if !params[:patient][:weight].nil?
+                  	@patient.weight = params[:patient][:weight] 
+                    end
+                    if !params[:patient][:email_id].nil?
+                     @patient.email_id = params[:patient][:email_id]
+                    end
+                    if !params[:patient][:phone_no].nil?
+                       @patient.phone_no = params[:patient][:phone_no]
+                    end 
+                    @patient.users << current_user
+                    @patient.save!
 
-	       @patient = Patient.new 
-         @patient.name = params[:patient][:patient_name]
-         @patient.profile_pic = create_profile_pic params[:patient][:patient_name]
-         @patient.unique_id = params[:patient][:unique_id]
-         @patient.unique_id_type = params[:patient][:unique_id_type]
-            if !params[:patient][:date_of_birth].nil?
-          	@patient.date_of_birth = params[:patient][:date_of_birth]
-            end     
-            if !params[:patient][:age].nil?
-          	@patient.age = params[:patient][:age]
-            end
-            if !params[:patient][:sex].nil?
-          	@patient.sex = params[:patient][:sex]
-            end
-            if !params[:patient][:height].nil?
-          	@patient.height = params[:patient][:height]
-            end
-            if !params[:patient][:weight].nil?
-          	@patient.weight = params[:patient][:weight] 
-            end
-            if !params[:patient][:email_id].nil?
-             @patient.email_id = params[:patient][:email_id]
-            end
-            if !params[:patient][:phone_no].nil?
-               @patient.phone_no = params[:patient][:phone_no]
-            end 
-            @patient.users << current_user
-            @patient.save!
+                    #attaching patient to the user 
 
-            #attaching patient to the user 
+                    @current_user.patients << @patient
+                    @current_user.save!
 
-            @current_user.patients << @patient
-            @current_user.save!
+                       respond_to do |format|
 
-               respond_to do |format|
+        		            format.json{
+        		               render :json =>{ :success => true ,
+        		                      :info => "new patient created",
+        		                      :data => { 
+        		                                    :patient => @patient.as_json } } }
+        		         end 
 
-		            format.json{
-		               render :json =>{ :success => true ,
-		                      :info => "new patient created",
-		                      :data => { 
-		                                    :patient => @patient.as_json } } }
-		         end 
+         else 
+
+
+              respond_to do |format|
+
+                format.json{
+                   render :json =>{ :success => false ,
+                          :info => "Patient already exists for this Unique ID and Unique Id type"
+                             } }
+              end 
+
+
+         end 
 
 	    
 	    else 
