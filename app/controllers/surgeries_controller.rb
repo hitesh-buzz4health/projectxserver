@@ -160,12 +160,15 @@ class SurgeriesController < ApplicationController
              if !params[:nature_of_surgery].nil?
                 @surgery.nature_of_surgery = params[:nature_of_surgery]
              end 
-             if !params[:surgical_approach].nil?
-                @surgery.surgical_approach = params[:surgical_approach]
-             end 
+            
              if !params[:computer_nav].nil?
                 @surgery.computer_nav = params[:computer_nav]
              end 
+             if !params[:type_of_surgery].nil?
+                @surgery.type_of_surgery = params[:type_of_surgery]
+             end 
+           
+           
              @surgery.user = current_user 
              @surgery.patient = patient
              @surgery.surgical_approach = surgical_approach
