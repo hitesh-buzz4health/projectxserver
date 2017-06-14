@@ -8,7 +8,7 @@ class SurgeriesController < ApplicationController
        patient = Patient.find(params[:patient_id])
        surgical_approach  =  SurgicalApproach.find(params[:surgical_apprpach_id])
        diagnosis    = Diagnosis.find(params[:diagnosis_id])
-
+        params.to_unsafe_h.deep_symbolize_keys
    	if  !patient.nil? && !surgical_approach.nil? && !diagnosis.nil?
           if !params[:surgery].nil? && !params[:implant].nil?             
               creating_surgery params[:surgery]  , patient  , surgical_approach , diagnosis
