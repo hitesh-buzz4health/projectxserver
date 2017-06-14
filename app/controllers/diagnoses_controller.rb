@@ -54,7 +54,8 @@ class DiagnosesController < ApplicationController
                 format.json{
                    render :json =>{ :success => true ,
                           :info => "new diagnosis created",
-                          :data => { :diagnosis => diagnosis.as_json() } } }
+                          :data => { :diagnosis => diagnosis.as_json(),
+                                     :patient_id => params[:patient_id] } } }
           end 
                 
            
