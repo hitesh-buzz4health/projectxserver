@@ -19,7 +19,8 @@ class SurgeriesController < ApplicationController
                   format.json{
                      render :json =>{ :success => true ,
                             :info => "new surgery  created",
-                            :data => { :surgery => @surgery.as_json } } }
+                            :data => { :surgery => @surgery.as_json ,
+                                       :diagnosis_id => diagnosis.id.to_s} } }
                end 
           else 
               #rendering message in case of nil surgery
