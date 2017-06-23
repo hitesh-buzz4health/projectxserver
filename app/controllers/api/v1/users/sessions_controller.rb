@@ -1,7 +1,7 @@
 class Api::V1::Users::SessionsController < Devise::SessionsController
   skip_before_action :verify_signed_out_user, :only => [:destroy]
- skip_before_action :require_no_authentication, :only => [ :new, :create, :cancel , :destroy]
- skip_before_action :verify_authenticity_token,
+  skip_before_action :require_no_authentication, :only => [ :new, :create, :cancel , :destroy]
+  skip_before_action :verify_authenticity_token,
                      :if => Proc.new { |c| c.request.format == 'application/json' }
   before_action :ensure_params_exist, :except => [:destroy]
   skip_before_action :authenticate_user_from_token!
@@ -12,7 +12,7 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
   
   def create
 
-            resource = User.find_for_database_authentication(:email => params[:user][:email]) 
+            resource = User.find_for_database_authentication(:email => params[:user][:email].downcase) 
             
             if !resource.nil? && resource.valid_password?(params[:user][:password])
 

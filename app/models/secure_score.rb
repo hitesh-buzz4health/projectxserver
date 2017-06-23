@@ -7,6 +7,12 @@ class SecureScore
   belongs_to :score ,  autosave: true 
   has_many :answers , autosave: true
 
+  # this is a work around because we want to create a relation ship in 
+  # which   Secure Score can exist with and without surgery we will only save one 
+  # surgery  in a secured score 
+  has_and_belongs_to_many :surgeries , autosave: true
+
+
   field :patient_score ,            :type => Integer ,  :default => 0  
   field :score_date ,               :type => Date 
   
@@ -24,7 +30,6 @@ class SecureScore
       :anatomy => self.score.anatomy,
       :answers => self.answers.as_json
     }
-
     else
    {
        :_id => id.to_s,

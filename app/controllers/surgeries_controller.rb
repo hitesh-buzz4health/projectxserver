@@ -8,7 +8,6 @@ class SurgeriesController < ApplicationController
        patient = Patient.find(params[:patient_id])
        surgical_approach  =  SurgicalApproach.find(params[:surgical_apprpach_id])
        diagnosis    = Diagnosis.find(params[:diagnosis_id])
-
    	if  !patient.nil? && !surgical_approach.nil? && !diagnosis.nil?
           if !params[:surgery].nil? && !params[:implant].nil?             
               creating_surgery params[:surgery]  , patient  , surgical_approach , diagnosis
@@ -20,7 +19,8 @@ class SurgeriesController < ApplicationController
                   format.json{
                      render :json =>{ :success => true ,
                             :info => "new surgery  created",
-                            :data => { :surgery => @surgery.as_json } } }
+                            :data => { :surgery => @surgery.as_json ,
+                                       :diagnosis_id => diagnosis.id.to_s} } }
                end 
           else 
               #rendering message in case of nil surgery
@@ -160,13 +160,16 @@ class SurgeriesController < ApplicationController
              if !params[:nature_of_surgery].nil?
                 @surgery.nature_of_surgery = params[:nature_of_surgery]
              end 
-             if !params[:surgical_approach].nil?
-                @surgery.surgical_approach = params[:surgical_approach]
-             end 
+            
              if !params[:computer_nav].nil?
                 @surgery.computer_nav = params[:computer_nav]
              end 
-
+             if !params[:type_of_surgery].nil?
+                @surgery.type_of_surgery = params[:type_of_surgery]
+             end 
+           
+           
+             @surgery.user = current_user 
              @surgery.patient = patient
              @surgery.surgical_approach = surgical_approach
              @surgery.diagnosis = diagnosis

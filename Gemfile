@@ -67,3 +67,9 @@ gem  'gmail'
 # used for threads 
 gem 'workers'
 
+#use for search
+ 
+gem 'sunspot_mongo' 
+gem 'sunspot_solr'
+
+
