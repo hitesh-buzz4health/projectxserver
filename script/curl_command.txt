@@ -1,0 +1,197 @@
+# registering a user 
+
+
+curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d ' {"user":{"email":"SVional2@buzz4health.com"  , "name":"sonal"  , "license_no" : "122345" }}'  http://localhost:3000/register.json
+
+
+
+http://wasp.orthogram.c66.me/api/v1/users/sign_in.json
+
+#logging a current user
+
+	curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d ' {"user" :{"email" :"rajesh@buzz4health.com" , "password" : "buzz4health"}}' http://wasp.orthogram.c66.me/api/v1/users/sign_in.json
+
+
+
+
+#static data controller
+
+-Index operation
+
+	curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET -d '{"user_id" : "59256bdb3634ee538fb95b2a" , "auth_token" : "8QmscM4w4fKHt7PzTWK-" , "surgery_type" : "Knee" }' http://wasp.orthogram.c66.me/static_data.json
+
+
+
+
+
+
+#preference curl command 
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET -d '{"user_id" : "591417a1054728123eb1c75b" , "auth_token" : "TZkwt7MW8hMZyw16SURA" , "surgery_type" : "Knee" }' http://localhost:3000/static_data.json
+
+
+-get current user preference 
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET -d '{"user_id" : "591417a1054728123eb1c75b" , "auth_token" : "TZkwt7MW8hMZyw16SURA"  }' http://localhost:3000/current_user_preference.json
+
+
+
+-Create operation 
+
+curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d ' { "user_id" : "591417a1054728123eb1c75b" , "auth_token" : "TZkwt7MW8hMZyw16SURA" ,"user":{ "surgery_type" : "pta nhi" , "surgical_approach": "hero"  } }'  http://localhost:3000/preferences.json
+
+curl -v -H "Accept: application/json" -H "Content-type: application/json" -X PUT -d ' { "user_id" : "591417a1054728123eb1c75b" , "auth_token" : "TZkwt7MW8hMZyw16SURA" ,"user":{ "preference_id" : "59104be80547281ee6861301" , "surgery_type" : "pta nhi hero" , "surgical_approach": "hero 123"  } }'  http://localhost:3000/preferences/5911979305472818e1771206.json
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET -d '{"user_id" : "591417a1054728123eb1c75b" , "auth_token" : "TZkwt7MW8hMZyw16SURA" }' http://localhost:3000/preferences/591417f7054728123eb1c75c.json
+
+
+
+
+
+#curl commands for patient 
+
+curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d ' { "user_id" : "591417a1054728123eb1c75b" , "auth_token" : "TZkwt7MW8hMZyw16SURA" , "patient":{ "patient_name" : "hera bhai " , "age": 48 ,  "unique_id" : "abcdefgh" , "unique_id_type" : "adhar"}}'  http://localhost:3000/patients.json
+
+curl -v -H "Accept: application/json" -H "Content-type: application/json" -X PUT -d ' { "user_id" : "591417a1054728123eb1c75b" , "auth_token" : "TZkwt7MW8hMZyw16SURA" ,  "patient_name" : "shahrukh khan" , "age": 20  ,"sex" : "Male"  }'  http://localhost:3000/patients/591198b705472818e1771207.json
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET -d '{"user_id" : "591417a1054728123eb1c75b" , "auth_token" : "TZkwt7MW8hMZyw16SURA" }' http://localhost:3000/patients/591198b705472818e1771207.json
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"user_id" : "591417a1054728123eb1c75b" , "auth_token" : "TZkwt7MW8hMZyw16SURA" , "score_id" : "5916dbd905472869b9f3005b" , 
+"patient_id" : "59142c2c054728123eb1c762" , "secure_score" :{ "patient_score" : 5   }}' http://localhost:3000/creating_patient_secure_score.json
+
+
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET -d '{"user_id" : "591417a1054728123eb1c75b" , "auth_token" : "TZkwt7MW8hMZyw16SURA"  , "patient_id" : "59142c2c054728123eb1c762"}' http://localhost:3000/list_of_scores.json
+
+,
+
+
+# curl command for  diagnosis
+
+-for creating 
+
+curl -v -H "Accept: application/json" -H "Content-Type: multipart/form-data" -X POST -d ' { "user_id" : "591417a1054728123eb1c75b" , "auth_token" : "TZkwt7MW8hMZyw16SURA" ,"patient_id" : "591ad5a4054728164404b71b" ,  "diagnoses":{ "diagnosis_outcome" : "knee replacement "}}'  http://localhost:3000/diagnoses.json
+
+-for updating 
+
+
+curl -v -H "Accept: application/json" -H "Content-type: application/json" -X PUT -d ' { "user_id" : "591417a1054728123eb1c75b" , "auth_token" : "TZkwt7MW8hMZyw16SURA" ,  "diagnoses":{ "diagnosis_outcome" : "knee replacement avail "}}'  http://localhost:3000/diagnoses/591ad86e054728164404b71c.json
+
+
+-for showing 
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET -d '{"user_id" : "591417a1054728123eb1c75b" , "auth_token" : "TZkwt7MW8hMZyw16SURA" }' http://localhost:3000/diagnoses/591ad86e054728164404b71c.json
+
+# curl commands for surgery .
+
+	
+
+	curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d ' { "user_id" : "591417a1054728123eb1c75b" , "auth_token" : "TZkwt7MW8hMZyw16SURA" , "patient_id" : "591ad5a4054728164404b71b" , "surgical_apprpach_id":"592530bd0547286524ea5ae0", "diagnosis_id" : "591ad86e054728164404b71c" , "surgery" :{ "patient_name" : "shahrukh khan" , "age": 40  ,"sex" : "female" } , "implant" : [{"brand_name" : "hero" , "tibia_stem": true ,"type_of_implant" : "rotating" , "tibia_type" : true ,"tibia_bearing" :true , "patella_resurfaced" : true , "femur_stem": true  } , {"brand_name" : "hero" , "tibia_stem": true ,"type_of_implant" : "rotating" , "tibia_type" : true ,"tibia_bearing" :false , "patella_resurfaced" : true , "femur_stem": true   }]}'  http://localhost:3000/surgeries.json
+
+
+
+curl -v -H "Accept: application/json" -H "Content-type: application/json" -X PUT -d ' { "user_id" : "591417a1054728123eb1c75b" , "auth_token" : "TZkwt7MW8hMZyw16SURA" ,"patient_name" : "salman ullah khan" , "age": 40  ,"sex" : "female" ,"implant" : [{ "implant_id":"59145232054728123eb1c77e", "brand_name" : "hero gandu" , "tibia_stem": true ,"type_of_implant" : "rotating" , "tibia_type" : true ,"tibia_bearing" :true , "patella_resurfaced" : false , "femur_stem": true  }] }'  http://localhost:3000/surgeries/59145399054728123eb1c782.json
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET -d '{"user_id" : "591417a1054728123eb1c75b" , "auth_token" : "TZkwt7MW8hMZyw16SURA" }' http://localhost:3000/surgeries/59145399054728123eb1c782.json
+
+
+
+
+#curl command for implants 
+
+
+
+
+
+curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d ' { "user_id" : "591417a1054728123eb1c75b" , "auth_token" : "TZkwt7MW8hMZyw16SURA" , "brand_name" : "first_two" , "tibia_stem": true ,"type_of_implant" : "rotating"  }'  http://localhost:3000/implants.json
+
+
+
+curl -v -H "Accept: application/json" -H "Content-type: application/json" -X PUT -d ' { "user_id" : "591417a1054728123eb1c75b" , "auth_token" : "TZkwt7MW8hMZyw16SURA" , "surgery_id" : "5911999a05472818e1771208" ,"brand_name" : "hero" , "tibia_stem": true ,"type_of_implant" : "female"  , "femur_stem"  : true}'  http://localhost:3000/implants/591463d9054728123eb1c784.json
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET -d '{"user_id" : "591417a1054728123eb1c75b" , "auth_token" : "TZkwt7MW8hMZyw16SURA" }' http://localhost:3000/implants/591463d9054728123eb1c784.json
+
+
+
+#scores_controller 
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET -d '{"user_id" : "591417a1054728123eb1c75b" , "auth_token" : "TZkwt7MW8hMZyw16SURA"  }' http://localhost:3000/scores.json
+
+
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET -d '{"user_id" : "591417a1054728123eb1c75b" , "auth_token" : "TZkwt7MW8hMZyw16SURA"  }' http://localhost:3000/scores/5916dbd905472869b9f3005b.json
+
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET -d '{"user_id" : "591417a1054728123eb1c75b" , "auth_token" : "TZkwt7MW8hMZyw16SURA" , "type_of_score" : "Oxford Knee Score"  }' http://localhost:3000/get_score_with_type.json
+
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET -d '{"user_id" : "591417a1054728123eb1c75b" , "auth_token" : "TZkwt7MW8hMZyw16SURA" , "anatomy" : "Knee"  }' http://localhost:3000/get_score_with_anatomy.json
+
+
+
+
+
+
+#------------------------------scores list User ------------------------------------------------#
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET -d '{"user_id" : "591417a1054728123eb1c75b" , "auth_token" : "TZkwt7MW8hMZyw16SURA"   }' http://localhost:3000/all_scores.json
+
+#-------------------------------------------surgeries list -------------------------------------------#
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET -d '{"user_id" : "591417a1054728123eb1c75b" , "auth_token" : "TZkwt7MW8hMZyw16SURA" , "type_of_score" : "KneeScore"  }' http://localhost:3000/all_surgeries.json
+
+
+#-----------------------------------secure score ------------------------------------------------#
+
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET -d '{"user_id" : "591417a1054728123eb1c75b" , "auth_token" : "TZkwt7MW8hMZyw16SURA" , "type_of_score" : "KneeScore"  }' http://localhost:3000/secure_scores/592d4db00547281e4cf95cef.json
+
+#-------------------------------------------------surgery detail -------------------------------------------------------------#
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET -d '{"user_id" : "591417a1054728123eb1c75b" , "auth_token" : "TZkwt7MW8hMZyw16SURA" , "type_of_score" : "KneeScore"  }' http://localhost:3000/surgery_detail/5926f790054728658f11d6c5.json
+
+
+#-----------------------------------------------  one more api  ----------------------------------------------------------------#
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET -d '{"user_id" : "591417a1054728123eb1c75b" , "auth_token" : "TZkwt7MW8hMZyw16SURA" , "type_of_score" : "KneeScore"  }' http://localhost:3000/score_list_by_patient/591ad5a4054728164404b71b.json
+
+#---------------------------search api -------------------------#
+
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET -d '{"user_id" : "591417a1054728123eb1c75b" , "auth_token" : "TZkwt7MW8hMZyw16SURA" , "type_of_score" : "KneeScore"  }' http://localhost:3000/search_by_patient.json
+
+plication/json" -X GET -d '{"user_id" : "59256bdb3634ee538fb95b2a" , "auth_token" : "8QmscM4w4fKHt7PzTWK-" , "query" : "tushar"  }' http:// http://wasp.orthogram.c66.me/search_by_patient.json
+
+
+#-------------------------getting surgeries by patient id -------------------#
+
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET -d '{"user_id" : "591417a1054728123eb1c75b" , "auth_token" : "TZkwt7MW8hMZyw16SURA"   }' http://localhost:3000/list_of_surgeries_by_patient/591ad5a4054728164404b71b.json
+
+
+#-------------------------Analytics------------------------------------------------#
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET -d '{"user_id" : "59256bdb3634ee538fb95b2a" , "auth_token" : "8QmscM4w4fKHt7PzTWK-"   }' http://wasp.orthogram.c66.me/  get_implant_brands_against_revision_surgery.json
+
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET -d '{"user_id" : "59256bdb3634ee538fb95b2a" , "auth_token" : "8QmscM4w4fKHt7PzTWK-"   }' http://wasp.orthogram.c66.me/get_implant_brands_against_primary_surgery.json
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET -d '{"user_id" : "59256bdb3634ee538fb95b2a" , "auth_token" : "8QmscM4w4fKHt7PzTWK-"   }' http://wasp.orthogram.c66.me/get_primary_vs_revision_surgery.json
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET -d '{"user_id" : "59256bdb3634ee538fb95b2a" , "auth_token" : "8QmscM4w4fKHt7PzTWK-"   }' http://wasp.orthogram.c66.me/get_patients_by_age_and_surgeries.json
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET -d '{"user_id" : "59256bdb3634ee538fb95b2a" , "auth_token" : "8QmscM4w4fKHt7PzTWK-"   }' http://wasp.orthogram.c66.me/get_patients_by_implant_brand_vs_score.json
+
+
+
+
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET -d '{"user_id" : "591417a1054728123eb1c75b" , "auth_token" : "TZkwt7MW8hMZyw16SURA"   }' http://localhost:3000/get_primary_vs_revision_surgery.json
+
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET -d '{"user_id" : "591417a1054728123eb1c75b" , "auth_token" : "TZkwt7MW8hMZyw16SURA"   }' http://localhost:3000/get_implant_brands_against_revision_surgery.json
+
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET -d '{"user_id" : "591417a1054728123eb1c75b" , "auth_token" : "TZkwt7MW8hMZyw16SURA"   }' http://localhost:3000/get_patients_by_implant_brand_vs_score.json
+
+
+my_hash
+

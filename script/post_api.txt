@@ -1,0 +1,166 @@
+#register
+
+curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d ' {"user":{"email":"SVional2@buzz4health.com"  , "name":"sonal"  , "license_no" : "122345" }}'  http://localhost:3000/register.json
+
+#-- preference 
+
+1.creating preference api
+
+curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d ' { "user_id" : "591417a1054728123eb1c75b" , "auth_token" : "TZkwt7MW8hMZyw16SURA" ,"user":{
+ "surgery_type" : " " , "surgical_approach": "" ,  } }'  http://localhost:3000/preferences.json
+
+
+ Http type - POST
+ api - /preferences.json
+"user":{
+    field :brand_name,                :type => String
+    field :type_of_implant,           :type => String
+    field :surgery_type,              :type => String
+    field :surgical_approach,         :type => String
+    field :weight_unit,               :type => String
+    field :computer_nav ,             type: Boolean, :default => false
+    field :tibia_type,                :type => String
+    field :tibia_bearing ,            :type => String
+    field :patella_resurfaced ,       :type => Boolean,  :default => false
+    field :tibia_stem,                type: Boolean, :default => false
+    field :femur_stem,                type: Boolean,  :default => false
+} 
+
+2.updating Preference
+
+curl -v -H "Accept: application/json" -H "Content-type: application/json" -X PUT -d ' { "user_id" : "591417a1054728123eb1c75b" , "auth_token" : "TZkwt7MW8hMZyw16SURA" ,"user":{ "preference_id" : "59104be80547281ee6861301" , "surgery_type" : "pta nhi hero" , "surgical_approach": "hero 123"  } }'  http://localhost:3000/preferences/5911979305472818e1771206.json
+
+Http type - Put 
+api -/preferences/<preference -id>.json
+
+"user":{
+    field :brand_name,                :type => String
+    field :type_of_implant,           :type => String
+    field :surgery_type,              :type => String
+    field :surgical_approach,         :type => String
+    field :weight_unit,               :type => String
+    field :computer_nav ,             type: Boolean, :default => false
+    field :tibia_type,                :type => String
+    field :tibia_bearing ,            :type => String
+    field :patella_resurfaced ,       :type => Boolean,  :default => false
+    field :tibia_stem,                type: Boolean, :default => false
+    field :femur_stem,                type: Boolean,  :default => false
+} 
+
+
+
+#Post  commands for patient 
+3. creating patient
+curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d ' { "user_id" : "591417a1054728123eb1c75b" , "auth_token" : "TZkwt7MW8hMZyw16SURA" , "patient":{ "patient_name" : "hera bhai " , "age": 48 ,  "unique_id" : "abcdefgh" , "unique_id_type" : "adhar"}}'  http://localhost:3000/patients.json
+
+Http type - POST
+API - /patients.json
+"patient":{ 
+     field :name,                              :type => String
+    field :date_of_birth,                     :type  => Date
+    field :age ,                              :type => Integer,  :default => 0
+    field :sex ,                              :type => String
+    field :height,                            :type => Integer,  :default => 0
+    field :weight,                            :type => Integer,  :default => 0
+    field :unique_id,                         :type => String
+    field :unique_id_type,                    :type => String
+    field :email_id,                          :type =>  String
+    field :phone_no,                          :type => Integer,  :default => 0   
+    field :profile_pic,                       :type => String                
+
+}
+
+4 .Updating Patient
+curl -v -H "Accept: application/json" -H "Content-type: application/json" -X PUT -d ' { "user_id" : "591417a1054728123eb1c75b" , "auth_token" : "TZkwt7MW8hMZyw16SURA" ,  "patient_name" : "shahrukh khan" , "age": 20  ,"sex" : "Male"  }'  http://localhost:3000/patients/591198b705472818e1771207.json
+
+Http type - Put 
+api -/patients/<preference -id>.json
+"patient":{ 
+     field :name,                              :type => String
+    field :date_of_birth,                     :type  => Date
+    field :age ,                              :type => Integer,  :default => 0
+    field :sex ,                              :type => String
+    field :height,                            :type => Integer,  :default => 0
+    field :weight,                            :type => Integer,  :default => 0
+    field :unique_id,                         :type => String
+    field :unique_id_type,                    :type => String
+    field :email_id,                          :type =>  String
+    field :phone_no,                          :type => Integer,  :default => 0   
+    field :profile_pic,                       :type => String                
+
+}
+
+
+#patient_secure_score  creation
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"user_id" : "591417a1054728123eb1c75b" , "auth_token" : "TZkwt7MW8hMZyw16SURA" , "score_id" : "5916dbd905472869b9f3005b" , 
+"patient_id" : "59142c2c054728123eb1c762" , "secure_score" :{ "" : 5   }}' http://localhost:3000/creating_patient_secure_score.json
+
+Http - post
+api - /creating_patient_secure_score.json
+parameters-  auth_token , user_id , score_id , patient_id , surgery_id ,secure_score {
+    patient_score => int  ,score_date => Date ,answers [{question_id => string , option_id => String}]}
+
+
+
+
+# curl command for  diagnosis
+
+-for creating 
+
+curl -v -H "Accept: application/json" -H "Content-Type: multipart/form-data" -X POST -d ' { "user_id" : "591417a1054728123eb1c75b" , "auth_token" : "TZkwt7MW8hMZyw16SURA" ,"patient_id" : "591ad5a4054728164404b71b" ,  "diagnoses":{ "diagnosis_outcome" : "knee replacement "}}'  http://localhost:3000/diagnoses.json
+
+Http - POST
+api - /diagnoses.json
+parameters - auth_token , user_id , patient_id
+diagnoses{
+    diagnosis_outcome => String 
+    image_tags => Array
+    pre_op_images => Array of images path
+    post_op_images =>  Array of images path
+
+}
+
+
+-for updating 
+
+
+curl -v -H "Accept: application/json" -H "Content-type: application/json" -X PUT -d ' { "user_id" : "591417a1054728123eb1c75b" , "auth_token" : "TZkwt7MW8hMZyw16SURA" ,  "diagnoses":{ "diagnosis_outcome" : "knee replacement avail "}}'  http://localhost:3000/diagnoses/591ad86e054728164404b71c.json
+
+# curl commands for surgery .
+
+
+curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d ' { "user_id" : "591417a1054728123eb1c75b" , "auth_token" : "TZkwt7MW8hMZyw16SURA" , "patient_id" : "591ad5a4054728164404b71b" , "surgical_apprpach_id":"5915a26c05472850085ae484", "diagnosis_id" : "591ad86e054728164404b71c" , "surgery" :{ "patient_name" : "shahrukh khan" , "age": 40  ,"sex" : "female" } , "implant" : [{"brand_name" : "hero" , "tibia_stem": true ,"type_of_implant" : "rotating" , "tibia_type" : true ,"tibia_bearing" :true , "patella_resurfaced" : true , "femur_stem": true  } , {"brand_name" : "hero" , "tibia_stem": true ,"type_of_implant" : "rotating" , "tibia_type" : true ,"tibia_bearing" :false , "patella_resurfaced" : true , "femur_stem": true , "" : ""  }]}'  http://localhost:3000/surgeries.json
+
+
+
+Http - POST
+api - /surgeries.json
+parameters - auth_token , user_id ,patient_id ,surgical_apprpach_id ,diagnosis_id
+surgery{
+    date_of_surgery => Date ,
+    surgery_for => String ,
+    nature_of_surgery => String (Revision and Primary first letter should be capital)
+    computer_nav => boolean 
+    type_of_surgery => String 
+}
+implant[{brand_name => String 
+        type_of_implant => String 
+         tibia_type => String 
+         tibia_bearing  => String 
+          patella_resurfaced => boolean 
+           tibia_stem => boolean
+            femur_stem => boolean
+         },
+         {brand_name => String 
+        type_of_implant => String 
+         tibia_type => String 
+         tibia_bearing  => String 
+          patella_resurfaced => boolean 
+           tibia_stem => boolean
+            femur_stem => boolean}]
+
+
+
+
+curl -v -H "Accept: application/json" -H "Content-type: application/json" -X PUT -d ' { "user_id" : "591417a1054728123eb1c75b" , "auth_token" : "TZkwt7MW8hMZyw16SURA" ,"patient_name" : "salman ullah khan" , "age": 40  ,"sex" : "female" ,"implant" : [{ "implant_id":"59145232054728123eb1c77e", "brand_name" : "hero gandu" , "tibia_stem": true ,"type_of_implant" : "rotating" , "tibia_type" : true ,"tibia_bearing" :true , "patella_resurfaced" : false , "femur_stem": true  }] }'  http://localhost:3000/surgeries/59145399054728123eb1c782.json

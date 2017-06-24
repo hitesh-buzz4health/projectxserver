@@ -1,0 +1,77 @@
+Q1.Pain	 	
+None	 		
+Mild / Occasional	 		
+Mild (Stairs only)	 		
+Mild (Walking and Stairs	 		
+Moderate - Occasional	 
+Moderate - Continual	 		
+Severe	 		
+
+
+Q2.Flexion Contracture (if present)
+5°-10°
+10°-15°
+16°-20°
+>20°
+
+Q3.Extension lag
+<10°
+10-20°
+>20°
+
+Q4.Total Range of Flexion	 	
+0-5	
+6-10	
+11-15
+16-20
+21-25		 		
+26-30		
+31-35		
+36-40		
+41-45		
+46-50	 	 	 	 	 		 	 	 	 
+51-55		
+56-60		
+61-65
+66-70		
+71-75	 			
+76-80		
+81-85		
+86-90		
+91-95		
+96-100	 	 	 	 	 			 	 	 	 
+101-105		
+106-110		
+111-115		
+116-120		
+121-125
+
+
+Q5.Alignment (Varus & Valgus)
+0		
+1
+2		
+3		
+4
+5 - 10	
+11		
+12		
+13		
+14		
+15
+Over 15°	
+
+
+Q6.Stability (Maximum movement in any position) for Antero-posterior	
+<5mm	 		
+5-10mm	 		 
+10+mm	 		
+		 		
+
+
+
+Q7.Mediolateral
+<5°
+6-9°
+10-14°
+15°
