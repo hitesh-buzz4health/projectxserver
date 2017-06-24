@@ -8,6 +8,7 @@ class Question
 
 
   field :question_title ,                  :type => String      
+  field :category ,                        :type => String 
 
 
   def as_json(options={})
@@ -15,6 +16,7 @@ class Question
      
      :_id => id.to_s,
   	 :question_title => question_title ,
+     :category => category,
   	 :options => self.options.as_json(:only => %w[_id option value])
   }
   end 
