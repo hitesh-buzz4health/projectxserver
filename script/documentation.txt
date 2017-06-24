@@ -1,0 +1,50 @@
+
+
+  Api's documentation for orthogram
+
+
+
+
+  #preference curl command 
+
+
+  Index operation 
+
+  url_path - /preferences.json 
+  Verb- Get
+  
+   parameters - user_id , auth_token , type_of_surgery
+
+   eg - curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET -d '{"user_id" : "591417a1054728123eb1c75b" , "auth_token" : "TZkwt7MW8hMZyw16SURA" , "type_of_surgery" : "Knee" }' http://localhost:3000/preferences.json
+
+   
+
+   Create Operation 
+
+
+   url_path - /preferences.json
+
+   
+   Verb - POST
+
+   parameters - user_id , auth_token ,params[:user][:surgical_approach]
+			                          params[:user][:computer_nav]
+			                          params[:user][:tibia_type]
+			                          params[:user][:tibia_bearing]
+			                          params[:user][:patella_resurfaced]
+			                          params[:user][:tibia_bearing]
+			                          params[:user][:tibia_stem]
+			                          params[:user][:femur_stem]
+
+
+
+
+ 
+
+
+
+
+
+			    
+
+
