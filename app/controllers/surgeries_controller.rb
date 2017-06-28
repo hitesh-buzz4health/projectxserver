@@ -6,7 +6,7 @@ class SurgeriesController < ApplicationController
 
 
        patient = Patient.find(params[:patient_id])
-       surgical_approach  =  SurgicalApproach.find(params[:surgical_apprpach_id])
+       surgical_approach  =  SurgicalApproach.find(params[:surgical_approach_id])
        diagnosis    = Diagnosis.find(params[:diagnosis_id])
    	if  !patient.nil? && !surgical_approach.nil? && !diagnosis.nil?
           if !params[:surgery].nil? && !params[:implant].nil?             
