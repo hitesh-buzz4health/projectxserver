@@ -127,7 +127,7 @@ class SurgeriesController < ApplicationController
                                 :info => "Surgery info has been updated.",
                                 :data => {    
                                                :surgery => @surgery.as_json ,
-                                              :diagnosis_id => diagnosis.id.to_s} } }
+                                               :diagnosis_id => @surgery.diagnosis.id.to_s} } }
                    end
       else 
              # when patient id is nil 
