@@ -125,8 +125,9 @@ class SurgeriesController < ApplicationController
                       format.json{
                          render :json =>{ :success => true ,
                                 :info => "Surgery info has been updated.",
-                                :data => { 
-                                              :surgery => @surgery.as_json } } }
+                                :data => {    
+                                               :surgery => @surgery.as_json ,
+                                              :diagnosis_id => diagnosis.id.to_s} } }
                    end
       else 
              # when patient id is nil 
@@ -246,7 +247,7 @@ class SurgeriesController < ApplicationController
                                  render :json =>{ :success => true ,
                                         :info => "Surgery info .",
                                         :patient => surgery.patient.as_json,
-                                         :surgery => surgery.as_json  } }
+                                        :surgery => surgery.as_json  } }
            end
 
 

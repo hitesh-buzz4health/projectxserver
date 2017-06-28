@@ -65,8 +65,7 @@ curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET
 ,
 
 
-# curl command for  diagnosis
-
+# curl command for  ƒ
 -for creating 
 
 curl -v -H "Accept: application/json" -H "Content-Type: multipart/form-data" -X POST -d ' { "user_id" : "591417a1054728123eb1c75b" , "auth_token" : "TZkwt7MW8hMZyw16SURA" ,"patient_id" : "591ad5a4054728164404b71b" ,  "diagnoses":{ "diagnosis_outcome" : "knee replacement "}}'  http://localhost:3000/diagnoses.json
@@ -178,7 +177,7 @@ curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET
 
 curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET -d '{"user_id" : "59256bdb3634ee538fb95b2a" , "auth_token" : "8QmscM4w4fKHt7PzTWK-"   }' http://wasp.orthogram.c66.me/get_patients_by_age_and_surgeries.json
 
-curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET -d '{"user_id" : "59256bdb3634ee538fb95b2a" , "auth_token" : "8QmscM4w4fKHt7PzTWK-"   }' http://wasp.orthogram.c66.me/get_patients_by_implant_brand_vs_score.json
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET -d '{"user_id" : "595388db0238766fcdfed38a" , "auth_token" : "RK2HvgDU7SQB8ogriH4P"   }' http://wasp.orthogram.c66.me/get_patients_by_implant_brand_vs_score.json
 
 
 
@@ -194,4 +193,14 @@ curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET
 
 
 my_hash
+RK2HvgDU7SQB8ogriH4P
+595388db0238766fcdfed38a
 
+59538c990238767094dc364d
+
+
+curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d ' { "user_id" : "595388db0238766fcdfed38a" , "auth_token" : "RK2HvgDU7SQB8ogriH4P" ,  "patient_id" : "595389960238766fcdfed38b" , "diagnoses":{ "diagnosis_outcome" : "knee replacement avail "}}'  http://localhost:3000/diagnoses.json
+
+curl -v -H "Accept: application/json" -H "Content-Type: multipart/form-data" -X POST -d ' {"user_id" : "595388db0238766fcdfed38a" , "auth_token" : "RK2HvgDU7SQB8ogriH4P" ,"patient_id" : "595389960238766fcdfed38b" ,  "diagnoses":{ "diagnosis_outcome" : "knee replacement "}}'  http://localhost:3000/diagnoses.json
+
+curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d ' { "user_id" : "595388db0238766fcdfed38a" , "auth_token" : "RK2HvgDU7SQB8ogriH4P" , "patient":{ "patient_name" : "hera bhai " , "age": 48 ,  "unique_id" : "abcdefgh" , "unique_id_type" : "adhar"}}'  http://localhost:3000/patients.json

@@ -130,7 +130,8 @@ class DiagnosesController < ApplicationController
                 format.json{
                    render :json =>{ :success => true ,
                           :info => "diagnosis updated.",
-                          :data => { :diagnosis => diagnosis.as_json() } } }
+                          :data => { :diagnosis => diagnosis.as_json() ,
+                                     :patient_saved_id => params[:patient_id]} } }
           end     
 
 
