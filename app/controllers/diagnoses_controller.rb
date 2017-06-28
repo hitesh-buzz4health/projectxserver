@@ -83,6 +83,17 @@ class DiagnosesController < ApplicationController
    		if !params[:diagnoses][:diagnosis_outcome].nil?
           diagnosis.diagnosis_outcome = params[:diagnoses][:diagnosis_outcome]
         end 
+        tags_array = []
+        if !params[:diagnoses][:image_tags].nil?
+          tags_array = params[:diagnoses][:image_tags]
+
+        if tags_array.kind_of?(String)
+          tags_array = tags_array.split(",").map{|e| e.strip}
+        end
+        tags_array = tags_array.uniq
+        diagnosis.image_tags = tags_array
+
+
         
         if !params[:diagnoses][:pre_op_images].nil?
       	 count_pre_op_images = params[:diagnoses][:pre_op_images].length;
