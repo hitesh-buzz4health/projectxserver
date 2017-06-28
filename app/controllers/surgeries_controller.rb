@@ -86,20 +86,20 @@ class SurgeriesController < ApplicationController
     surgical_approach  =  SurgicalApproach.find(params[:surgical_approach_id])
 
     if !@surgery.nil? && !params.nil?
-              if !params[:date_of_surgery].nil?
-                  @surgery.date_of_surgery = params[:date_of_surgery]
+              if !params[:surgery][:date_of_surgery].nil?
+                  @surgery.date_of_surgery = params[:surgery][:date_of_surgery]
               end 
-              if !params[:surgery_for].nil?
-                  @surgery.surgery_for = params[:surgery_for]
+              if !params[:surgery][:surgery_for].nil?
+                  @surgery.surgery_for = params[:surgery][:surgery_for]
               end 
-              if !params[:nature_of_surgery].nil?
-                  @surgery.nature_of_surgery = params[:nature_of_surgery]
+              if !params[:surgery][:nature_of_surgery].nil?
+                  @surgery.nature_of_surgery = params[:surgery][:nature_of_surgery]
               end 
-              if !params[:surgical_approach].nil?
-                 @surgery.surgical_approach = params[:surgical_approach]
+              if !params[:surgery][:surgical_approach].nil?
+                 @surgery.surgical_approach = params[:surgery][:surgical_approach]
               end 
-              if !params[:computer_nav].nil?
-                  @surgery.computer_nav = params[:computer_nav]
+              if !params[:surgery][:computer_nav].nil?
+                  @surgery.computer_nav = params[:surgery][:computer_nav]
               end 
               if !surgical_approach.nil? 
                   @surgery.surgical_approach = surgical_approach 
