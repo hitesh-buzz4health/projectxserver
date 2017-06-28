@@ -86,7 +86,7 @@ class DiagnosesController < ApplicationController
         tags_array = []
         if !params[:diagnoses][:image_tags].nil?
           tags_array = params[:diagnoses][:image_tags]
-
+        end
         if tags_array.kind_of?(String)
           tags_array = tags_array.split(",").map{|e| e.strip}
         end
@@ -94,7 +94,7 @@ class DiagnosesController < ApplicationController
         diagnosis.image_tags = tags_array
 
 
-        
+
         if !params[:diagnoses][:pre_op_images].nil?
       	 count_pre_op_images = params[:diagnoses][:pre_op_images].length;
       	 #uploading prop images 
