@@ -209,12 +209,14 @@ class PatientsController < ApplicationController
       secure_score.score = score 
       secure_score.save!
       
+      
         respond_to do |format|
 
                 format.json{
                    render :json =>{ :success => true ,
                           :info => "creation of secure score",
-                          :data => { :secure_score => secure_score } } }
+                          :data => { :secure_score => secure_score ,
+                                     :patient_id => patient.id } } }
         end 
 
 
