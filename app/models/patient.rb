@@ -26,7 +26,9 @@ class Patient
   searchable do 
     text :name ,      :stored => true
     text :email_id ,  :stored => true
-    text :user_ids  , :stored => true
+    
+    #defining user query 
+    string :user_ids  ,:multiple => true
   end 
 
   after_save { |obj| Sunspot.index!(obj) }
