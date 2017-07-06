@@ -328,9 +328,11 @@ end
 def get_patient_by_query 
 
   query = params[:query]
+  user_ids = []
+  user_ids << current_user.id.to_s
   list = Sunspot.search [Patient] do
     fulltext query
-    with :user_ids , current_user.id
+    with(:user_ids, user_ids)
     paginate(:page => params[:page], :per_page => 15)
   end
  respond_to do |format|
