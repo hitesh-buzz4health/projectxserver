@@ -335,13 +335,13 @@ def get_patient_by_query
     with(:user_ids, user_ids)
     paginate(:page => params[:page], :per_page => 15)
   end
- respond_to do |format|
+  respond_to do |format|
 
-                format.json{
-                   render :json =>{ :success => true ,
-                          :info => "list of related patients",
-                          :list => list.results.as_json
-                           } }
+                  format.json{
+                     render :json =>{ :success => true ,
+                            :info => "list of related patients",
+                            :list => list.results.as_json
+                             } }
     end 
 
 end 
