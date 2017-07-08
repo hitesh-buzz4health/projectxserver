@@ -41,6 +41,8 @@ class Patient
 
 
     def as_json(options={})
+
+     if options[:simple_query]  
     {   
         :_id => id.to_s,
         :name => name,
@@ -55,9 +57,29 @@ class Patient
         :phone_no => phone_no ,
         :profile_pic => profile_pic,
         :surgeries_count => self.surgeries.count
-    }
-    end  
+    }else{
 
+        :_id => id.to_s,
+        :name => name,
+        :date_of_birth => date_of_birth,
+        :age => age,
+        :sex => sex,
+        :height => height,
+        :weight => weight,
+        :unique_id => unique_id,
+        :unique_id_type => unique_id_type,
+        :email_id => email_id ,
+        :phone_no => phone_no ,
+        :profile_pic => profile_pic,
+        :diagnoses => self.diagnoses.as_json(),
+        :secured_scores => self.secure_scores.as_json()
+
+
+    }
+
+
+    end 
+  end  
 
 
 

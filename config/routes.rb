@@ -47,6 +47,7 @@ end
      get   '/score_list_by_patient/:id' => 'patients#get_list_of_score'
      get   '/search_by_patient' => 'patients#get_patient_by_query'
      get   '/list_of_surgeries_by_patient/:id' => 'patients#get_surgeries_list'
+     get  '/sync_patient_data'  =>   'syncing#pushing_user_data'
 
      # analytics 
      get 'get_implant_brands_against_revision_surgery' => 'analytics#get_implant_brands_against_revision_surgery'
@@ -54,6 +55,7 @@ end
      get 'get_primary_vs_revision_surgery' => 'analytics#get_primary_vs_revision_surgery'
      get 'get_patients_by_age_and_surgeries' => 'analytics#get_patients_by_age_and_surgeries'
      get 'get_patients_by_implant_brand_vs_score' => 'analytics#get_patients_by_implant_brand_vs_score'
+    
 
 
 
