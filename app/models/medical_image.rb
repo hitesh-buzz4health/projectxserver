@@ -1,4 +1,4 @@
-class MedicalImage 
+  class MedicalImage 
 
 
   include Mongoid::Document
@@ -59,8 +59,33 @@ end
 
 
 
+ def as_json(options={})
+ {
+     :_id => id.to_s,
+     :image_tags => image_tags,
+     :image_type => image_type,
+     :url => url ,
+     :secure_url => secure_url ,
+     :base_url =>base_url,
+     :public_id => public_id,
+     :tags => tags,
+     :width => width,
+     :height => height,
+     :format => format,
+     :bytes => bytes ,
+     :version => version ,
+     :activity_at => activity_at,
+     :image_deleted => image_deleted,
+     :download_url =>download_url
+  
+ }
+ end 
 
 
+
+ 
+ 
+ 
 
 
 
