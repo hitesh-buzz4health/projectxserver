@@ -72,7 +72,7 @@ class Patient
         :phone_no => phone_no ,
         :profile_pic => profile_pic,
         :diagnoses => self.diagnoses.as_json(),
-        :secured_scores => self.secure_scores.as_json()
+        :secured_scores => self.secure_scores.as_json({:answer => true})
 
 
     }

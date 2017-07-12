@@ -24,6 +24,7 @@ class SecureScore
     if options[:answer]  
   { 
       :_id => id.to_s,
+      :surgery_id => self.surgeries[0].id.to_s
       :patient_score => patient_score,
       :score_date => score_date,
       :type_of_score  => self.score.type_of_score,
