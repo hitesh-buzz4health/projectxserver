@@ -9,6 +9,7 @@
 
   field :image_tags,              :type => Array
   field :image_type,              :type => String # "preop" "postop" , normal
+  field :local_id ,               :type => String 
 
 
 
@@ -62,6 +63,7 @@ end
  def as_json(options={})
  {
      :_id => id.to_s,
+     :local_id => local_id,
      :image_tags => image_tags,
      :image_type => image_type,
      :url => url ,

@@ -33,7 +33,7 @@ class PreferencesController < ApplicationController
 
 	def create
 		if current_user.preference.nil?
-		    if !params[:user].nil? && !params[:user][:surgery_type].nil?
+		    if !params[:user].nil? 
 			  @preference = Preference.new 
 			  @preference.surgery_type = params[:user][:surgery_type]  # we have to check wether we have to insert conditions for each parameter separtel
 			  @preference.brand_name = params[:user][:brand_name]
@@ -41,6 +41,7 @@ class PreferencesController < ApplicationController
 			  @preference.surgical_approach = params[:user][:surgical_approach]
 			  @preference.computer_nav = params[:user][:computer_nav]
 			  @preference.weight_unit = params[:user][:weight_unit]
+			  @preference.height_unit = params[:user][:height_unit]
 			  @preference.tibia_type = params[:user][:tibia_type]
 			  @preference.tibia_bearing = params[:user][:tibia_bearing]
 			  @preference.patella_resurfaced = params[:user][:patella_resurfaced]
