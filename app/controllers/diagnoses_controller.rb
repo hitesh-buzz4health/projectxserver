@@ -21,13 +21,14 @@ class DiagnosesController < ApplicationController
       diagnosis.image_tags = tags_array
       end 
       if !params[:diagnoses][:pre_op_images].nil?
-      	 count_pre_op_images = params[:diagnoses][:pre_op_images].length;
+      	  pre_op_images = params[:diagnoses][:pre_op_images];
       	 #uploading preop images 
-         count_pre_op_images.times do | count_preop|
+         pre_op_images.each do |preop_image|
          	medical_image = MedicalImage.new
          	medical_image.image_tags =  tags_array
          	medical_image.image_type = "preop"
-          medical_image.upload(params[:diagnoses][:pre_op_images][count_preop] ,tags_array)
+          medical_image.local_id = preop_image[:local_id]
+          medical_image.upload(preop_image[:url],tags_array)
           medical_image.diagnosis = diagnosis
           medical_image.save!
          end 
@@ -35,13 +36,14 @@ class DiagnosesController < ApplicationController
       end 
 
        if !params[:diagnoses][:post_op_images].nil?
-      	 count_post_op_images = params[:diagnoses][:post_op_images].length;
+         post_op_images = params[:diagnoses][:post_op_images];
       	 #uploading pop images 
-         count_post_op_images.times do | count_post|
+         post_op_images.each do |post_op_image|
          	medical_image = MedicalImage.new
          	medical_image.image_tags =  tags_array
          	medical_image.image_type = "postop"
-          medical_image.upload(params[:diagnoses][:post_op_images][count_post] ,tags_array)
+          medical_image.local_id = post_op_image[:local_id]
+          medical_image.upload(post_op_image[:url] ,tags_array)
           medical_image.diagnosis = diagnosis
           medical_image.save!
          end 
@@ -94,34 +96,33 @@ class DiagnosesController < ApplicationController
 
        end 
   
-        if !params[:diagnoses][:pre_op_images].nil?
-      	 count_pre_op_images = params[:diagnoses][:pre_op_images].length;
-      	 #uploading prop images 
-         count_pre_op_images.times do | count_preop|
-         	medical_image = MedicalImage.new
-         	medical_image.image_tags =  tags_array
-         	medical_image.image_type = "preop"
-            medical_image.upload(params[:diagnoses][:pre_op_images][count_preop] ,diagnosis.image_tags)
-            medical_image.diagnosis = diagnosis
-            medical_image.save!
+       if !params[:diagnoses][:pre_op_images].nil?
+          pre_op_images = params[:diagnoses][:pre_op_images];
+         #uploading preop images 
+         pre_op_images.each do |preop_image|
+          medical_image = MedicalImage.new
+          medical_image.image_tags =  tags_array
+          medical_image.image_type = "preop"
+          medical_image.local_id = preop_image[:local_id]
+          medical_image.upload(preop_image[:url],tags_array)
+          medical_image.diagnosis = diagnosis
+          medical_image.save!
          end 
 
       end 
-
-       if !params[:diagnoses][:post_op_images].nil?
-      	 count_post_op_images = params[:diagnoses][:post_op_images].length;
-      	 #uploading prop images 
-         count_post_op_images.times do | count_post|
-         	medical_image = MedicalImage.new
-         	medical_image.image_tags =  tags_array
-         	medical_image.image_type = "postop"
-            medical_image.upload(params[:diagnoses][:post_op_images][count_post] ,diagnosis.image_tags)
+      if !params[:diagnoses][:post_op_images].nil?
+         post_op_images = params[:diagnoses][:post_op_images];
+         #uploading pop images 
+         post_op_images.each do |post_op_image|
+            medical_image = MedicalImage.new
+            medical_image.image_tags =  tags_array
+            medical_image.image_type = "postop"
+            medical_image.local_id = post_op_image[:local_id]
+            medical_image.upload(post_op_image[:url] ,tags_array)
             medical_image.diagnosis = diagnosis
             medical_image.save!
          end 
-
       end 
-      
 
         diagnosis.save!
 
