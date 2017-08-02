@@ -1,6 +1,7 @@
 class Diagnosis
 
   include Mongoid::Document
+  include Mongoid::Timestamps
 
 
 

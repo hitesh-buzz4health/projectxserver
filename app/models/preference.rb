@@ -4,7 +4,8 @@ class Preference
 
 
     #Associations
-    belongs_to :user 
+    belongs_to :user  , autosave: true 
+    has_many   :custom_preferences  , autosave: true  
     
     field :brand_name,                :type => String
     field :type_of_implant,           :type => String
@@ -36,7 +37,8 @@ class Preference
       :tibia_bearing =>tibia_bearing,
       :patella_resurfaced =>patella_resurfaced,
       :tibia_stem =>tibia_stem,
-      :femur_stem =>femur_stem
+      :femur_stem =>femur_stem, 
+      :custom_preferences => self.custom_preferences
 
     }
     end 

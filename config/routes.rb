@@ -35,7 +35,12 @@ end
      resources  :diagnoses
 
      resources  :static_data
-    #defining routes for getting scores with 
+
+     resources  :custom_preferences
+     
+     post '/create_multiple_custom_preferences' => 'custom_preferences#create_multiple_custom_preferences'
+
+     #defining routes for getting scores with 
      get '/get_score_with_type' => 'scores#get_with_type_of_score'
      get '/get_score_with_anatomy' => 'scores#get_with_type_of_anatomy'
      post '/creating_patient_secure_score' => 'patients#creating_secure_score'
