@@ -37,6 +37,8 @@ end
      resources  :static_data
 
      resources  :custom_preferences
+
+     resources  :events  
      
      post '/create_multiple_custom_preferences' => 'custom_preferences#create_multiple_custom_preferences'
 
@@ -61,9 +63,10 @@ end
      get 'get_patients_by_age_and_surgeries' => 'analytics#get_patients_by_age_and_surgeries'
      get 'get_patients_by_implant_brand_vs_score' => 'analytics#get_patients_by_implant_brand_vs_score'
     
+     #for streaming 
+     get 'coordinates_streaming' => 'streaming_coordinates#sending_coordinates'
 
-
-
+ 
 
        
   # root 'surgeons#index'
