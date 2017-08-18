@@ -35,7 +35,7 @@ else
 
 end 
 
-
+	
 end 
 
 
@@ -52,6 +52,24 @@ def update
 	                           } }
 	end 
   end 
+end 
+
+
+
+
+
+def show 
+   event = Event.find(params[:id])
+
+     respond_to do |format|
+
+              format.json{
+               render :json =>{
+                              :success => true,
+                              :info => "event show" ,
+                              :event => event} }
+      end 
+
 end 
 
 end 
