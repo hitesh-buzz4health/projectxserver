@@ -66,6 +66,10 @@ end
      #for streaming 
      get 'coordinates_streaming' => 'streaming_coordinates#sending_coordinates'
 
+
+     #veer sir 
+
+     get  'get_vr_videos' => 'static_data#get_vr_videos'
  
 
        
