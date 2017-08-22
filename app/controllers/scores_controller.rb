@@ -1,9 +1,10 @@
 class ScoresController < ApplicationController
 
+skip_before_action :authenticate_user_from_token!
 
 	def index 
       
-        list_of_scores = Score.all         
+        list_of_scores = Score.all          
             
         respond_to do |format|
 

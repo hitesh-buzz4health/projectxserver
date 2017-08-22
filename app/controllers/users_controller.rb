@@ -21,8 +21,7 @@ class UsersController < ApplicationController
 			            # @user.phone_number          = params[:user][:phone_number]
 			            # @user.safe_update(%w[name email ], params[:user])
                          @user.name = params[:user][:name]
-                         @user.email = params[:user][:email]
-                        
+                         @user.email = params[:user][:email].downcase
                         if params[:user][:specialization]
                             @user.specialization = params[:user][:specialization]
                         end 
@@ -32,20 +31,12 @@ class UsersController < ApplicationController
 			            else
 			              @user.password              = lookup_hash[0,6]
 			              @user.password_confirmation = lookup_hash[0,6]
-			              
 			            end
-
 			            worker = Workers::Worker.new
-
 			              worker.perform do
-
-			             	 send_password_mail params[:user][:email] , lookup_hash[0,6]
-
+			             	 send_password_mail params[:user][:email].downcase , lookup_hash[0,6]
 			             end
-			             #we have to  see wether we have to send password through mail or not.
-                          
-			          
-                        
+			            #we have to  see wether we have to send password through mail or not.     
 			            #assigning auth_token at the time of registration
 			            @user.assign_authentication_token
 			            if !params[:user][:license_no].nil?
@@ -62,35 +53,22 @@ class UsersController < ApplicationController
                          @user.profile_pic =  create_profile_pic params[:user][:name]
                           	
 			            success = @user && @user.save
-			            if success && @user.errors.empty?
-			              
-			              # Jobs::Mailer.async.signup_welcome_email(@user.id).commit!
-			              #Jobs::Mailer.async.new_invitation_alpha(@user.id,@user.email,@user.password).commit!
-			             
-			            
+				            if success && @user.errors.empty?
+				            
+					              sign_in(:user, @user)
+					              render :status => :ok,
+					                     :json => { :success => true,
+					                                :info => "Successfully Registered! Please check you email for password",
+					                                :data => {  :user => @user.as_json
 
-			              sign_in(:user, @user)
-
- 
-			              #if @user.country_code == "IN" && @user.user_persona == "doctor"
-			                #show_promo_code = true
-			              #end
-
-			             
-
-			              render :status => :ok,
-			                     :json => { :success => true,
-			                                :info => "Successfully Registered! Please check you email for password",
-			                                :data => {  :user => @user.as_json
-
-			                                            } }
-
-			            else
-			             render :status => :unprocessable_entity,
-			                    :json => { :success => false,
-			                                :info => @user.errors,
-			                                :data => {} }
-			            end
+					                                            } }
+				            else
+				            	
+				             render :status => :unprocessable_entity,
+				                    :json => { :success => false,
+				                                :info => @user.errors,
+				                                :data => {} }
+				            end
 			          else
 			            render  :status => 409,
 			                    :json => { :success => false,
@@ -137,7 +115,7 @@ class UsersController < ApplicationController
 	      render :status => :ok,
                  :json => { :success => true,
                             :info => "list of surgeries",
-                             :scores_list => secure_scores.as_json({:answer => false})
+                            :score => secure_scores.as_json({:answer => false})
                                        } 
 
 

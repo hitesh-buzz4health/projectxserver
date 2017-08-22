@@ -6,9 +6,8 @@ class SurgeriesController < ApplicationController
 
 
        patient = Patient.find(params[:patient_id])
-       surgical_approach  =  SurgicalApproach.find(params[:surgical_apprpach_id])
+       surgical_approach  =  SurgicalApproach.find(params[:surgical_approach_id])
        diagnosis    = Diagnosis.find(params[:diagnosis_id])
-
    	if  !patient.nil? && !surgical_approach.nil? && !diagnosis.nil?
           if !params[:surgery].nil? && !params[:implant].nil?             
               creating_surgery params[:surgery]  , patient  , surgical_approach , diagnosis
@@ -20,7 +19,8 @@ class SurgeriesController < ApplicationController
                   format.json{
                      render :json =>{ :success => true ,
                             :info => "new surgery  created",
-                            :data => { :surgery => @surgery.as_json } } }
+                            :data => { :surgery => @surgery.as_json ,
+                                       :diagnosis_id => diagnosis.id.to_s} } }
                end 
           else 
               #rendering message in case of nil surgery
@@ -86,20 +86,20 @@ class SurgeriesController < ApplicationController
     surgical_approach  =  SurgicalApproach.find(params[:surgical_approach_id])
 
     if !@surgery.nil? && !params.nil?
-              if !params[:date_of_surgery].nil?
-                  @surgery.date_of_surgery = params[:date_of_surgery]
+              if !params[:surgery][:date_of_surgery].nil?
+                  @surgery.date_of_surgery = params[:surgery][:date_of_surgery]
               end 
-              if !params[:surgery_for].nil?
-                  @surgery.surgery_for = params[:surgery_for]
+              if !params[:surgery][:surgery_for].nil?
+                  @surgery.surgery_for = params[:surgery][:surgery_for]
               end 
-              if !params[:nature_of_surgery].nil?
-                  @surgery.nature_of_surgery = params[:nature_of_surgery]
+              if !params[:surgery][:nature_of_surgery].nil?
+                  @surgery.nature_of_surgery = params[:surgery][:nature_of_surgery]
               end 
-              if !params[:surgical_approach].nil?
-                 @surgery.surgical_approach = params[:surgical_approach]
+              if !params[:surgery][:surgical_approach].nil?
+                 @surgery.surgical_approach = params[:surgery][:surgical_approach]
               end 
-              if !params[:computer_nav].nil?
-                  @surgery.computer_nav = params[:computer_nav]
+              if !params[:surgery][:computer_nav].nil?
+                  @surgery.computer_nav = params[:surgery][:computer_nav]
               end 
               if !surgical_approach.nil? 
                   @surgery.surgical_approach = surgical_approach 
@@ -125,8 +125,9 @@ class SurgeriesController < ApplicationController
                       format.json{
                          render :json =>{ :success => true ,
                                 :info => "Surgery info has been updated.",
-                                :data => { 
-                                              :surgery => @surgery.as_json } } }
+                                :data => {    
+                                               :surgery => @surgery.as_json ,
+                                               :diagnosis_id => @surgery.diagnosis.id.to_s} } }
                    end
       else 
              # when patient id is nil 
@@ -160,13 +161,16 @@ class SurgeriesController < ApplicationController
              if !params[:nature_of_surgery].nil?
                 @surgery.nature_of_surgery = params[:nature_of_surgery]
              end 
-             if !params[:surgical_approach].nil?
-                @surgery.surgical_approach = params[:surgical_approach]
-             end 
+            
              if !params[:computer_nav].nil?
                 @surgery.computer_nav = params[:computer_nav]
              end 
-
+             if !params[:type_of_surgery].nil?
+                @surgery.type_of_surgery = params[:type_of_surgery]
+             end 
+           
+           
+             @surgery.user = current_user 
              @surgery.patient = patient
              @surgery.surgical_approach = surgical_approach
              @surgery.diagnosis = diagnosis
@@ -243,7 +247,7 @@ class SurgeriesController < ApplicationController
                                  render :json =>{ :success => true ,
                                         :info => "Surgery info .",
                                         :patient => surgery.patient.as_json,
-                                         :surgery => surgery.as_json  } }
+                                        :surgery => surgery.as_json  } }
            end
 
 
